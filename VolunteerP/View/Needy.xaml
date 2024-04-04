@@ -60,7 +60,9 @@
                                 </Ellipse.Fill>
                             </Ellipse>
                         </Border>
-
+                        <TextBlock Text="NAme"
+                                   Style="{StaticResource Text_Style}"
+                                   Margin="30 -40"/>
                     </DockPanel>
                     <!--// Home //-->
 

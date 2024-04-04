@@ -10,6 +10,9 @@
     <DataTemplate DataType="{x:Type vm:ProductVm}">
         <view:Product />
     </DataTemplate>
-
+    
+    <DataTemplate DataType="{x:Type vm:ProfileVm}">
+        <view:Profile />
+    </DataTemplate>
 
 </ResourceDictionary>

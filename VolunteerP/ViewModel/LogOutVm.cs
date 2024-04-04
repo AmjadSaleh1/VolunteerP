@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VolunteerP.ViewModel
 {
-    class ProfileVm
+    class LogOutVm
     {
     }
 }

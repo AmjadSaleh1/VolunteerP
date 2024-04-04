@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,19 @@ namespace VolunteerP.View
         public Profile()
         {
             InitializeComponent();
+        }
+
+
+        private void Ellipse_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            OpenFileDialog openDialog = new OpenFileDialog();
+            openDialog.Filter = "Image files|*.bmp;*.jpg;*png";
+            openDialog.FilterIndex = 1;
+            if (openDialog.ShowDialog() == true)
+            {
+                var url = openDialog.FileName;
+                this.UserProfileImage.ImageSource = new BitmapImage(new Uri(url));
+            }
         }
     }
 }
