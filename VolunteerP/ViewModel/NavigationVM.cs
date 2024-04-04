@@ -29,14 +29,13 @@ namespace VolunteerP.ViewModel
         private void Home(object obj) => CurrentView = new HomeVm();
         private void Product(object obj) => CurrentView = new ProductVm();
         private void Profile(object obj) => CurrentView = new ProfileVm();
-        private void LogOut(object obj) => CurrentView = new LogOutVm();
+        
 
         public NavigationVM()
         {
             HomeCommand = new RelayCommand(Home);
             ProductsCommand = new RelayCommand(Product);
             ProfileCommand = new RelayCommand(Profile);
-            LogoutCommand = new RelayCommand(LogOut);
 
             // Startup Page
             CurrentView = new HomeVm();

@@ -52,7 +52,7 @@ Style="{StaticResource Image_Style}" Margin="162,33,0,0" VerticalAlignment="Top"
             FontSize="30"/>
             </Grid>
             <Grid>
-                <Image Source="C:\Users\amjad\source\repos\VolunteerP\VolunteerP\Images\Name-icon.png"
+                <Image Source="C:\Users\amjad\source\repos\VolunteerP\VolunteerP\Images\location_icon.png"
 Style="{StaticResource Image_Style}" Margin="162,33,0,0" VerticalAlignment="Top" />
                 <TextBlock Text="Location" Style="{StaticResource Text_Style}"
              HorizontalAlignment="Center" Margin="20 30 0 0"

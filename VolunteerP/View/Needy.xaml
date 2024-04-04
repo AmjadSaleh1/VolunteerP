@@ -114,8 +114,7 @@
 
 
                 <!--// LogOut //-->
-                    <Menu:Btn  Style="{StaticResource BtnStyle}"
-                    Command="{Binding ProfileCommand}">
+                    <Menu:Btn  Style="{StaticResource BtnStyle}">
                         <Grid>
                             <Image Source="C:\Users\amjad\source\repos\VolunteerP\VolunteerP\Images\LogoutIcon3.png"
                             Style="{StaticResource Image_Style}"/>

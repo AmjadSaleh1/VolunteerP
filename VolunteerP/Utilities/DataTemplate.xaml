@@ -15,4 +15,5 @@
         <view:Profile />
     </DataTemplate>
 
+
 </ResourceDictionary>
