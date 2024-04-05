@@ -30,6 +30,13 @@ namespace VolunteerP.View
             Close();
         }
 
+        private void LogOut_click(object sender, RoutedEventArgs e)
+        {
+            var appWindow = new View.Log_Sign_in();
+            appWindow.Show();
+            this.Close();
+        }
+
         private void Ellipse_MouseDown(object sender, MouseButtonEventArgs e)
         {
             OpenFileDialog openDialog = new OpenFileDialog();

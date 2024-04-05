@@ -114,14 +114,14 @@
 
 
                 <!--// LogOut //-->
-                    <Menu:Btn  Style="{StaticResource BtnStyle}">
-                        <Grid>
-                            <Image Source="C:\Users\amjad\source\repos\VolunteerP\VolunteerP\Images\LogoutIcon3.png"
-                            Style="{StaticResource Image_Style}"/>
-                            <TextBlock Text="Logout"
-                    Style="{StaticResource Text_Style}" />
-                        </Grid>
-                    </Menu:Btn>
+                    <Grid>
+                        <Button x:Name="LogOutApp"
+                                Style="{StaticResource LogOutApp}"
+                                Click="LogOut_click" HorizontalAlignment="left"
+                                Margin="20 10 0 0"/>
+                        <TextBlock Text="LogOut" 
+                            Style="{StaticResource Text_Style}"/>
+                    </Grid>
 
                 </StackPanel>
 

@@ -168,5 +168,37 @@
 
     </Style>
 
+    <ImageBrush x:Key="Log_Out_i"
+              ImageSource="C:\Users\amjad\source\repos\VolunteerP\VolunteerP\Images\LogoutIcon3.png"
+              Stretch="None" />
+
+    <Style x:Key="LogOutApp"
+        TargetType="{x:Type Button}">
+
+        <Setter Property="Height"
+             Value="40" />
+        <Setter Property="Width"
+             Value="40" />
+
+        <Setter Property="Template">
+
+            <Setter.Value>
+
+                <ControlTemplate TargetType="{x:Type Button}">
+
+                    <Border x:Name="border"
+                         BorderThickness="0"
+                         Background="{StaticResource Log_Out_i}">
+
+                    </Border>
+
+                </ControlTemplate>
+
+            </Setter.Value>
+
+        </Setter>
+
+    </Style>
+
 
 </ResourceDictionary>
