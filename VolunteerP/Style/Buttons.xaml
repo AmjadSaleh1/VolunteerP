@@ -199,6 +199,89 @@
         </Setter>
 
     </Style>
+<!--/ Log in /Sign up Buttons/-->
+    <Style x:Key="LButton" TargetType="{x:Type Button}">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Width" Value="170"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="#fdfefe"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="25" BorderThickness="1" BorderBrush="white" Padding="15">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Background" Value="#e8e8e8"/>
+                <Setter Property="Foreground" Value="DimGray"/>
+            </Trigger>
+            <Trigger Property="IsMouseCaptured" Value="true">
+                <Setter Property="Background" Value="#d9d9d9"/>
+                <Setter Property="Foreground" Value="DimGray"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="GSignupButton" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Margin" Value="8 0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="30" BorderThickness="1" BorderBrush="#878787" Padding="15">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Background" Value="#d9d9d9"/>
+                
+            </Trigger>
+            <Trigger Property="IsMouseCaptured" Value="true">
+                <Setter Property="Background" Value="#c4c4c4"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <Style x:Key="SignButton" TargetType="{x:Type Button}">
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Margin" Value="0 20 0 0"/>
+        <Setter Property="Background" Value="#3AB19B"/>
+        <Setter Property="Foreground" Value="#fdfefe"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="25" BorderThickness="1" BorderBrush="#49b7a3" Padding="15">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Background" Value="#339685"/>
+                <Setter Property="Foreground" Value="white"/>
+            </Trigger>
+            <Trigger Property="IsMouseCaptured" Value="true">
+                <Setter Property="Background" Value="#2d7a6c"/>
+                <Setter Property="Foreground" Value="white"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
 
 </ResourceDictionary>

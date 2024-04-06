@@ -27,7 +27,7 @@ namespace VolunteerP.View
 
         private void CloseApp_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            Application.Current.Shutdown();
         }
 
         private void LogOut_click(object sender, RoutedEventArgs e)

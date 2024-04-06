@@ -18,6 +18,8 @@
             <ColumnDefinition Width="1.5*"/>
         </Grid.ColumnDefinitions>
 
+        
+        
         <Border CornerRadius="10 0 0 10">
             <Border.Background>
 
@@ -33,13 +35,86 @@
                 <Polygon Points="0,20 230,140 0,270" Fill="#4EB1B6"/>
                 <Polygon Points="100,400 200,370 180,470" Fill="#4EB1B6"/>
             </Canvas>
+
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="Sign Up" Style="{StaticResource TitleText}"/>
+                <TextBlock Text="Enter youre personal information and create new account to connect"
+                           Style="{StaticResource NormalText}"/>
+                <Button Content="Sign Up" Style="{StaticResource LButton}"/>
+            </StackPanel>
         </Grid>
 
-        <Border Background="#ffffff" Grid.Column="1" CornerRadius="10 0 0 10">
+        <Border Background="#ffffff" Grid.Column="1" CornerRadius="10 0 0 10"
+                 MouseDown="Border_MouseDown">
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="Sign In to App" 
+                           Style="{StaticResource TitleText}"
+                           Foreground="#3AB19B"/>
+                <StackPanel Orientation="Horizontal"
+                            Margin="0 20" HorizontalAlignment="Center">
+                    <Button Style="{StaticResource GSignupButton}">
+                        <Image Source="C:\Users\amjad\source\repos\VolunteerP\VolunteerP\Images\google-icon.png"
+                           Width="20" Height="20"/>
+                    </Button>
+
+                    <Button Style="{StaticResource GSignupButton}">
+                        <Image Source="C:\Users\amjad\source\repos\VolunteerP\VolunteerP\Images\facebook-icon.png"
+                            Width="20" Height="20"/>
+                    </Button>
+                </StackPanel>
+                <TextBlock Text="Use Login information:"
+                           Style="{StaticResource NormalText}"
+                           Foreground="#878787"
+                           Margin="0 10 0 15"/>
+
+                <Border BorderThickness="1" BorderBrush="#acb0af"
+                        Margin="70 7" CornerRadius="5">
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="C:\Users\amjad\source\repos\VolunteerP\VolunteerP\Images\email-icon.png"
+                               Height="20"/>
+                        <TextBlock x:Name="TextEmail"
+                                   Text="Email"
+                                   Style="{StaticResource TextHint}"
+                                   MouseDown="textEmail_MouseDown"/>
+                        <TextBox x:Name="txtEmail" TextChanged="txtEmail_TextChanged"
+                                  Style="{StaticResource textbox}"/>
+                    </Grid>
+                    
+                </Border>
+
+                <Border BorderThickness="1" BorderBrush="#acb0af"
+        Margin="70 7" CornerRadius="5">
+                    <Grid Margin="7 9">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Source="C:\Users\amjad\source\repos\VolunteerP\VolunteerP\Images\lock-icon1.png"
+               Height="20"/>
+                        <TextBlock x:Name="TextPassword"
+                   Text="Password"
+                   Style="{StaticResource TextHint}"
+                   MouseDown="textPassword_MouseDown"/>
+                        <PasswordBox x:Name="txtPassword" PasswordChanged="txtPassword_TextChanged"
+                                     Style="{StaticResource textbox}"/>
+                    </Grid>
+
+                </Border>
+
+                <Button Content="Sign in" Click="Button_click"
+                        Style="{StaticResource SignButton}"/>
+                
+            </StackPanel>
             
             
         </Border>
-        
+        <Button x:Name="CloseApp" Grid.Column="1"
+        Style="{StaticResource ExitApp}"
+        Click="CloseApp_Click" />
         
     </Grid>
 </Window>

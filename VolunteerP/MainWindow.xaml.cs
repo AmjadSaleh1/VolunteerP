@@ -21,7 +21,7 @@ namespace VolunteerP
         {
 
             InitializeComponent();
-            var appWindow = new View.Needy();
+            var appWindow = new View.Log_Sign_in();
             appWindow.Show();
             this.Close();
         }
