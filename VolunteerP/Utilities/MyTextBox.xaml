@@ -6,17 +6,17 @@
              xmlns:local="clr-namespace:VolunteerP.Utilities"
              mc:Ignorable="d" 
              Name="myTextBox">
-    
+
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="boolToVis"/>
     </UserControl.Resources>
     <Grid>
         <TextBlock 
-                 Foreground="#868686" Margin="10 0"
+                 Foreground="#868686" Margin="10,0,10,0"
                  VerticalAlignment="Center" Panel.ZIndex="1"
                  IsHitTestVisible="false"
-                 Text="{Binding Path=SignHint,ElementName=myTextBox}"
-                 Visibility="{Binding ElementName=textbox,Path=Text.IsEmpty, Converter={StaticResource boolToVis}}"/>
+                 Text="{Binding Path=Hint,ElementName=myTextBox}"
+                 Visibility="{Binding ElementName=textbox,Path=Text.IsEmpty, Converter={StaticResource boolToVis}}" Height="18"/>
         <TextBox x:Name="textbox"/>
     </Grid>
 

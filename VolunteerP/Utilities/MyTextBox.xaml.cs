@@ -14,13 +14,13 @@ namespace VolunteerP.Utilities
             InitializeComponent();
         }
 
-        public string SignHint
+        public string Hint
         {
-            get { return (string) GetValue(Hintproperty); }
-            set { SetValue(Hintproperty, value); }
+            get { return (string) GetValue(HintProperty); }
+            set { SetValue(HintProperty, value); }
         }
 
-        public static readonly DependencyProperty Hintproperty = DependencyProperty.Register
-            ("SignHint", typeof(string), typeof(MyTextBox));
+        public static readonly DependencyProperty HintProperty = DependencyProperty.Register
+            ("Hint", typeof(string), typeof(MyTextBox));
     }
 }

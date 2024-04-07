@@ -48,61 +48,71 @@
         <!--//input section//-->
         <Border Background="#ffffff" Grid.Column="1" Padding="20" CornerRadius="0 25 25 0"
          MouseDown="Border_MouseDown">
-            <Grid HorizontalAlignment="Center" VerticalAlignment="Center"
-                  Margin="0 10 0 0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="150"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+            <Grid>
+                <Button x:Name="MinimizeApp" Grid.Column="1"
+                  Style="{StaticResource minmizeB}"
+                 Click="Minimize_Click"/>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
+                <Button x:Name="CloseApp" Grid.Column="1"
+                 Style="{StaticResource ExitApp}"
+                  Click="CloseApp_Click" />
+                <Grid HorizontalAlignment="Center" VerticalAlignment="Center"
+       Margin="0 10 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Row="0" Text="Name"
-                           Style="{StaticResource SignText}"/>
-                <TextBlock Grid.Row="1" Text="Family"
-                           Style="{StaticResource SignText}"/>
-                <TextBlock Grid.Row="2" Text="Gender"
-                             Style="{StaticResource SignText}"/>
-                <TextBlock Grid.Row="3" Text="Date of birth"
-                              Style="{StaticResource SignText}"/>
-                <TextBlock Grid.Row="4" Text="Email"
-                             Style="{StaticResource SignText}"/>
-                <TextBlock Grid.Row="5" Text="Mobile"
-                            Style="{StaticResource SignText}"/>
-                <TextBlock Grid.Row="6" Text="Location"
-                            Style="{StaticResource SignText}"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
 
-                <uc:MyTextBox Grid.Column="1" Grid.Row="0" SignHint="Enter youre name"/>
-                <uc:MyTextBox Grid.Column="1" Grid.Row="1" SignHint="Enter youre Family name"/>
-                <uc:MyTextBox Grid.Column="1" Grid.Row="2" SignHint="male female"/>
-                <uc:MyTextBox Grid.Column="1" Grid.Row="3" SignHint="10,10,2004"/>
-                <uc:MyTextBox Grid.Column="1" Grid.Row="4" SignHint="Enter youre name"/>
-                <uc:MyTextBox Grid.Column="1" Grid.Row="5" SignHint="Enter youre name"/>
-                <uc:MyTextBox Grid.Column="1" Grid.Row="6" SignHint="Enter youre name"/>
+                    <TextBlock Grid.Row="0" Text="Name"
+                Style="{StaticResource SignText}"/>
+                    <TextBlock Grid.Row="1" Text="Family"
+                Style="{StaticResource SignText}"/>
+                    <TextBlock Grid.Row="2" Text="Gender"
+                  Style="{StaticResource SignText}"/>
+                    <TextBlock Grid.Row="3" Text="Date of birth"
+                   Style="{StaticResource SignText}"/>
+                    <TextBlock Grid.Row="4" Text="Email"
+                  Style="{StaticResource SignText}"/>
+                    <TextBlock Grid.Row="5" Text="Mobile"
+                 Style="{StaticResource SignText}"/>
+                    <TextBlock Grid.Row="6" Text="Location"
+                 Style="{StaticResource SignText}"/>
 
-                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1"
-                            Margin="0 10">
+                    <uc:MyTextBox Grid.Column="1" Grid.Row="0" Hint="Enter youre name"/>
+                    <uc:MyTextBox Grid.Column="1" Grid.Row="1" Hint="Enter youre Family name"/>
+                    <uc:MyTextBox Grid.Column="1" Grid.Row="3" Hint="10,10,2004"/>
+                    <uc:MyTextBox Grid.Column="1" Grid.Row="4" Hint="Enter youre name"/>
+                    <uc:MyTextBox Grid.Column="1" Grid.Row="5" Hint="Enter youre name"/>
+                    <uc:MyTextBox Grid.Column="1" Grid.Row="6" Hint="Enter youre name"/>
+                    <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1"
+                 Margin="0 10">
+                        <uc:UserOption Icon="Male" Text="Male"/>
+                        <uc:UserOption Icon="Male" Text="Female"/>
+                    </StackPanel>
                     
-                </StackPanel>
-            </Grid>
-        </Border>
+                    <Grid Grid.Column="1" Grid.Row="7" Margin="0 40 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-        <Button x:Name="MinimizeApp" Grid.Column="1"
-          Style="{StaticResource minmizeB}"
-          Click="Minimize_Click"/>
+                        <Button Style="{StaticResource buttonMain}" Margin="0 0 10 0" Content="Cancel" />
 
-        <Button x:Name="CloseApp" Grid.Column="1"
-        Style="{StaticResource ExitApp}"
-        Click="CloseApp_Click" />
-
+                        <Button Grid.Column="1" Style="{StaticResource buttonMainGreen}" Margin="10 0 0 0" Content="Save"/>
+                    </Grid>
+                </Grid>
+    </Grid>
+    </Border>
     </Grid>
 </Window>
