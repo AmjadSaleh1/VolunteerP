@@ -9,13 +9,13 @@
              Name="userOption">
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <Button Style="{StaticResource Buttonk}">
-                <fa:ImageAwesome Icon="{Binding Path=Icon,ElementName=userOption}" Width="15"
-                                 Height="15" Foreground="white"/>
+            <Button Style="{StaticResource Buttonk}" Click="Button_Click">
+                <fa:ImageAwesome Width="15" Height="15"
+                                 Icon="{Binding Path=Icon, ElementName=userOption}"
+                                 Foreground="{Binding Path=IconColor, ElementName=userOption}"/>
             </Button>
-            <TextBlock Text="{Binding Path=Text,ElementName=userOption}" Foreground="#363636"
-                       VerticalAlignment="Center"
-                       Margin="10 0 20 0" FontWeight="SemiBold"/>
+            <TextBlock Text="{Binding Path=Text, ElementName=userOption}" Foreground="#363636"
+                       VerticalAlignment="Center" Margin="10 0 20 0" FontWeight="SemiBold"/>
         </StackPanel>
     </Grid>
 </UserControl>
