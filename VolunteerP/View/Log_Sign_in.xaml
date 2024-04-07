@@ -40,7 +40,8 @@
                 <TextBlock Text="Sign Up" Style="{StaticResource TitleText}"/>
                 <TextBlock Text="Enter youre personal information and create new account to connect"
                            Style="{StaticResource NormalText}"/>
-                <Button Content="Sign Up" Style="{StaticResource LButton}"/>
+                <Button Content="Sign Up" Style="{StaticResource LButton}"
+                        Click="SignUp_Click"/>
             </StackPanel>
         </Grid>
 

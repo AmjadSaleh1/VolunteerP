@@ -25,6 +25,13 @@ namespace VolunteerP.View
             InitializeComponent();
         }
 
+        private void SignUp_Click(object sender, RoutedEventArgs e)
+        {
+            var appWindow=new View.SignUp();
+            appWindow.Show();
+            this.Close();
+        }
+
         private void textEmail_MouseDown(object sender, MouseEventArgs e)
         {
             txtEmail.Focus();
@@ -64,7 +71,10 @@ namespace VolunteerP.View
         {
             if(!string.IsNullOrEmpty(txtEmail.Text) && !string.IsNullOrEmpty(txtPassword.Password))
             {
-               MessageBox.Show("Succssfully Signed");
+                var appWindow = new View.Needy();
+                appWindow.Show();
+                this.Close();
+
             }
         }
 
@@ -80,5 +90,6 @@ namespace VolunteerP.View
         {
             Application.Current.Shutdown();
         }
+
     }
 }
