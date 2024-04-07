@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VolunteerP.View"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:uc="clr-namespace:VolunteerP.Utilities"
         mc:Ignorable="d"
         WindowStyle="none"
         Background="Transparent"
@@ -42,15 +43,66 @@
                                     Margin="3 0 0 0"/>
                 </Button>
             </StackPanel>
+            
         </Border>
-        <Border Background="#ffffff" Grid.Column="1" CornerRadius="10 0 0 10"
-         MouseDown="Border_MouseDown">
-           
-        </Border>
-       
         <!--//input section//-->
-        
-        
-        
+        <Border Background="#ffffff" Grid.Column="1" Padding="20" CornerRadius="0 25 25 0"
+         MouseDown="Border_MouseDown">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center"
+                  Margin="0 10 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="150"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Name"
+                           Style="{StaticResource SignText}"/>
+                <TextBlock Grid.Row="1" Text="Family"
+                           Style="{StaticResource SignText}"/>
+                <TextBlock Grid.Row="2" Text="Gender"
+                             Style="{StaticResource SignText}"/>
+                <TextBlock Grid.Row="3" Text="Date of birth"
+                              Style="{StaticResource SignText}"/>
+                <TextBlock Grid.Row="4" Text="Email"
+                             Style="{StaticResource SignText}"/>
+                <TextBlock Grid.Row="5" Text="Mobile"
+                            Style="{StaticResource SignText}"/>
+                <TextBlock Grid.Row="6" Text="Location"
+                            Style="{StaticResource SignText}"/>
+
+                <uc:MyTextBox Grid.Column="1" Grid.Row="0" SignHint="Enter youre name"/>
+                <uc:MyTextBox Grid.Column="1" Grid.Row="1" SignHint="Enter youre Family name"/>
+                <uc:MyTextBox Grid.Column="1" Grid.Row="2" SignHint="male female"/>
+                <uc:MyTextBox Grid.Column="1" Grid.Row="3" SignHint="10,10,2004"/>
+                <uc:MyTextBox Grid.Column="1" Grid.Row="4" SignHint="Enter youre name"/>
+                <uc:MyTextBox Grid.Column="1" Grid.Row="5" SignHint="Enter youre name"/>
+                <uc:MyTextBox Grid.Column="1" Grid.Row="6" SignHint="Enter youre name"/>
+
+                <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1"
+                            Margin="0 10">
+                    
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Button x:Name="MinimizeApp" Grid.Column="1"
+          Style="{StaticResource minmizeB}"
+          Click="Minimize_Click"/>
+
+        <Button x:Name="CloseApp" Grid.Column="1"
+        Style="{StaticResource ExitApp}"
+        Click="CloseApp_Click" />
+
     </Grid>
 </Window>
