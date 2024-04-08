@@ -89,12 +89,12 @@
                     <TextBlock Grid.Row="6" Text="Location"
                  Style="{StaticResource SignText}"/>
 
-                    <uc:MyTextBox Grid.Column="1" Grid.Row="0" Hint="Enter youre name"/>
-                    <uc:MyTextBox Grid.Column="1" Grid.Row="1" Hint="Enter youre Family name"/>
-                    <uc:MyTextBox Grid.Column="1" Grid.Row="3" Hint="10,10,2004"/>
-                    <uc:MyTextBox Grid.Column="1" Grid.Row="4" Hint="Enter youre name"/>
-                    <uc:MyTextBox Grid.Column="1" Grid.Row="5" Hint="Enter youre name"/>
-                    <uc:MyTextBox Grid.Column="1" Grid.Row="6" Hint="Enter youre name"/>
+                    <uc:MyTextBox x:Name="nameTextBox" Grid.Column="1" Grid.Row="0" Hint="Enter youre name"/>
+                    <uc:MyTextBox x:Name="emailTextBox" Grid.Column="1" Grid.Row="1" Hint="Enter youre Family name"/>
+                    <uc:MyTextBox Grid.Column="1" Grid.Row="3" Hint="Date Of Birth"/>
+                    <uc:MyTextBox Grid.Column="1" Grid.Row="4" Hint="Enter your Email"/>
+                    <uc:MyTextBox Grid.Column="1" Grid.Row="5" Hint="enter youre phone number"/>
+                    <uc:MyTextBox Grid.Column="1" Grid.Row="6" Hint="Enter youre location"/>
                     <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1"
                  Margin="0 10">
                         <uc:UserOption Icon="Male" Text="Male"/>
@@ -109,7 +109,7 @@
 
                         <Button Style="{StaticResource buttonMain}" Margin="0 0 10 0" Content="Cancel" />
 
-                        <Button Grid.Column="1" Style="{StaticResource buttonMainGreen}" Margin="10 0 0 0" Content="Save"/>
+                        <Button Grid.Column="1" Style="{StaticResource buttonMainGreen}" Margin="10 0 0 0" Content="Save" Click="SaveButton_Click"/>
                     </Grid>
                 </Grid>
     </Grid>

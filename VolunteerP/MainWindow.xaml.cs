@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VolunteerP.ServerApi.Data;
 
 
 namespace VolunteerP
@@ -21,8 +22,12 @@ namespace VolunteerP
         {
 
             InitializeComponent();
-            var appWindow = new View.Log_Sign_in();
-            appWindow.Show();
+        }
+
+        private void TestConnection_Click(object sender, RoutedEventArgs e)
+        {
+            var AppWindow = new View.SignUp();
+            AppWindow.Show();
             this.Close();
         }
     }

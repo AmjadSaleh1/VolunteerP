@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.Data;
 using System.Windows;
+using VolunteerP.ServerApi.Data;
 
 namespace VolunteerP
 {
@@ -9,6 +10,13 @@ namespace VolunteerP
     /// </summary>
     public partial class App : Application
     {
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            var dbContext = new MongoDbContext();
+            dbContext.TestDatabaseConnection();  // This will execute the test
+        }
     }
 
 }
