@@ -12,6 +12,7 @@ namespace VolunteerP.ServerApi.Models
 
         public ObjectId Id { get; set; } // MongoDB uses ObjectId for unique identifiers
         public string Name { get; set; }
+        public string Password { get; set; }
         public string Gender { get; set; }
         public String DateOfBirth { get; set; }
         public string Email { get; set; }

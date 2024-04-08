@@ -70,6 +70,7 @@ namespace VolunteerP.View
                 {
 
                     Name = nameTextBox.textbox.Text,  // Replace these with actual data collection from your form
+                    Password = txtPassword.Password,
                     Email = emailTextBox.textbox.Text,
                     DateOfBirth = Dob.textbox.Text,
                     PhoneNumber = Phone.textbox.Text,
@@ -120,6 +121,23 @@ namespace VolunteerP.View
 
                 // Optionally, you can use another approach to find and update only when saving if you prefer to bind a property
                 this.SelectedGender = gender;  // Store selected gender in a property for later use
+            }
+        }
+
+        private void textPassword_MouseDown(object sender, MouseEventArgs e)
+        {
+            txtPassword.Focus();
+        }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtPassword.Password))
+            {
+                TextPassword.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                TextPassword.Visibility = Visibility.Visible;
             }
         }
 
