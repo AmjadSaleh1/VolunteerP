@@ -9,7 +9,7 @@
              Name="userOption">
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <Button Name="btk" Style="{StaticResource Buttonk}" Click="Button_Click">
+            <Button Name="btk" Style="{StaticResource Buttonk}" Click="OnInternalButtonClick">
                 <fa:ImageAwesome Width="15" Height="15"
                                  Icon="{Binding Path=Icon, ElementName=userOption}"
                                  Foreground="{Binding Path=IconColor, ElementName=userOption}"/>

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -17,9 +15,56 @@ namespace VolunteerP.Utilities
         public UserOption()
         {
             InitializeComponent();
-            // Set the default icon color
-            IconColor = DefaultForeground;
+            btk.Click += OnInternalButtonClick;
         }
+
+        // Expose an event that external controls can subscribe to
+        public static readonly RoutedEvent ClickEvent = EventManager.RegisterRoutedEvent(
+            "Click", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(UserOption));
+
+        public event RoutedEventHandler Click
+        {
+            add { AddHandler(ClickEvent, value); }
+            remove { RemoveHandler(ClickEvent, value); }
+        }
+
+        private void OnInternalButtonClick(object sender, RoutedEventArgs e)
+        {
+            // Raise the external Click event to signal that this control was clicked
+            RoutedEventArgs newEventArgs = new RoutedEventArgs(ClickEvent, this);
+            RaiseEvent(newEventArgs);
+
+            // Handle visual and state updates internally
+            UpdateSelectionState();
+        }
+
+        private void UpdateSelectionState()
+        {
+            var parent = this.Parent as Panel;
+            if (parent != null)
+            {
+                foreach (UserOption sibling in parent.Children.OfType<UserOption>())
+                {
+                    sibling.IconColor = DefaultForeground; // Reset all siblings
+                    sibling.IsSelected = false;            // Deselect all siblings
+                }
+            }
+
+            this.IconColor = SelectedForeground; // Highlight this as selected
+            this.IsSelected = true;
+        }
+
+        public static readonly DependencyProperty IsSelectedProperty = DependencyProperty.Register(
+            "IsSelected", typeof(bool), typeof(UserOption), new PropertyMetadata(false));
+
+        public bool IsSelected
+        {
+            get { return (bool)GetValue(IsSelectedProperty); }
+            set { SetValue(IsSelectedProperty, value); }
+        }
+
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
+            "Text", typeof(string), typeof(UserOption));
 
         public string Text
         {
@@ -27,17 +72,14 @@ namespace VolunteerP.Utilities
             set { SetValue(TextProperty, value); }
         }
 
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
-            "Text", typeof(string), typeof(UserOption));
+        public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
+            "Icon", typeof(FontAwesome.WPF.FontAwesomeIcon), typeof(UserOption));
 
         public FontAwesome.WPF.FontAwesomeIcon Icon
         {
             get { return (FontAwesome.WPF.FontAwesomeIcon)GetValue(IconProperty); }
             set { SetValue(IconProperty, value); }
         }
-
-        public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
-            "Icon", typeof(FontAwesome.WPF.FontAwesomeIcon), typeof(UserOption));
 
         public static readonly DependencyProperty IconColorProperty = DependencyProperty.Register(
             "IconColor", typeof(Brush), typeof(UserOption), new PropertyMetadata(DefaultForeground));
@@ -46,35 +88,6 @@ namespace VolunteerP.Utilities
         {
             get { return (Brush)GetValue(IconColorProperty); }
             set { SetValue(IconColorProperty, value); }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            // Assuming 'UserOption' controls are direct children of the same parent panel
-            var parent = this.Parent as Panel;
-            if (parent != null)
-            {
-                // Deselect all other UserOption controls
-                foreach (UserOption sibling in parent.Children.OfType<UserOption>())
-                {
-                    // Reset the icon color to default for all siblings
-                    sibling.IconColor = Brushes.White; // or your default color
-                }
-            }
-
-            // Select this UserOption control by setting its icon color to green
-            this.IconColor = Brushes.Green;
-        }
-
-        private static IEnumerable<T> FindSiblings<T>(DependencyObject child) where T : DependencyObject
-        {
-            var parent = VisualTreeHelper.GetParent(child);
-            if (parent == null) return Enumerable.Empty<T>();
-
-            return Enumerable.Range(0, VisualTreeHelper.GetChildrenCount(parent))
-                             .Select(i => VisualTreeHelper.GetChild(parent, i))
-                             .OfType<T>()
-                             .Where(control => control != child);
         }
     }
 }
