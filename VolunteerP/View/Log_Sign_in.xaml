@@ -106,7 +106,7 @@
 
                 </Border>
 
-                <Button Content="Sign in" Click="Button_click"
+                <Button Content="Sign in" Click="SignIn_click"
                         Style="{StaticResource SignButton}"/>
                 
             </StackPanel>

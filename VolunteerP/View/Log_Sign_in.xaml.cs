@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using VolunteerP.ServerApi.Data;
+using VolunteerP.ServerApi.Services;
 
 namespace VolunteerP.View
 {
@@ -20,9 +22,17 @@ namespace VolunteerP.View
     /// </summary>
     public partial class Log_Sign_in : Window
     {
+        private UserService _userService;
         public Log_Sign_in()
         {
             InitializeComponent();
+            InitializeUserService();
+        }
+
+        private void InitializeUserService()
+        {
+            var dbContext = new MongoDbContext();  // Assuming MongoDbContext is correctly set up
+            _userService = new UserService(dbContext.Database);
         }
 
         private void SignUp_Click(object sender, RoutedEventArgs e)
@@ -67,14 +77,33 @@ namespace VolunteerP.View
 
         }
 
-        private void Button_click(object sender, RoutedEventArgs e)
+        private async void SignIn_click(object sender, RoutedEventArgs e)
         {
-            if(!string.IsNullOrEmpty(txtEmail.Text) && !string.IsNullOrEmpty(txtPassword.Password))
+            if (!string.IsNullOrEmpty(txtEmail.Text) && !string.IsNullOrEmpty(txtPassword.Password))
             {
-                var appWindow = new View.Needy();
-                appWindow.Show();
-                this.Close();
-
+                try
+                {
+                    bool isValidUser = await _userService.ValidateUserLogin(txtEmail.Text, txtPassword.Password); // Await is used correctly here
+                    if (isValidUser)
+                    {
+                        MessageBox.Show("Login Successful!");
+                        var appWindow = new View.Needy();
+                        appWindow.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Login Failed. Please check your email and password.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred: " + ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please enter both email and password.");
             }
         }
 
