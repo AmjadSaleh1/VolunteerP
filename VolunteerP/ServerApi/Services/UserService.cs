@@ -39,6 +39,12 @@ public class UserService
             return false;  // No user found or password does not match
         }
 
+        public async Task<bool> EmailExistsAsync(string email)
+        {
+            var user = await _usersCollection.Find(u => u.Email == email).FirstOrDefaultAsync();
+            return user != null;
+        }
+
 
 
     }

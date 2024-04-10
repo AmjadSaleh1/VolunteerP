@@ -5,6 +5,7 @@ using VolunteerP.ServerApi.Data;
 using VolunteerP.ServerApi.Models;
 using VolunteerP.Utilities;
 using VolunteerP.ServerApi.Services;
+using System.Text.RegularExpressions;
 
 namespace VolunteerP.View
 {
@@ -16,6 +17,7 @@ namespace VolunteerP.View
         private UserService _userService;
         public int SelectedGender { get; set; }
         private string genderstring;
+
         public SignUp()
         {
             InitializeComponent();
@@ -63,25 +65,40 @@ namespace VolunteerP.View
 
         private async void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            // Example: Collecting data from user input and using _userService to interact with the database
             try
             {
-                
-                // Assume there are text fields for User data collection
+                if (!AreAllFieldsFilled())
+                {
+                    DisplayFieldErrors();
+                    MessageBox.Show("Please fill in all required fields.");
+                    return;
+                }
+
+                if (await _userService.EmailExistsAsync(emailTextBox.Text))
+                {
+                    MessageBox.Show("This email is already registered.");
+                    return;
+                }
+
+                if (!IsValidEmail(emailTextBox.Text))
+                {
+                    emailErrorIcon.Visibility = Visibility.Visible; // Show the error icon
+                    MessageBox.Show("Please enter a valid email address.");
+                    return;
+                }
+
                 User newUser = new User
                 {
-
-                    Name = nameTextBox.textbox.Text,  // Replace these with actual data collection from your form
-                    Password = txtPassword.Password,
-                    Email = emailTextBox.textbox.Text,
-                    DateOfBirth = Dob.textbox.Text,
-                    PhoneNumber = Phone.textbox.Text,
-                    Location = location.textbox.Text,
+                    Name = nameTextBox.Text,
+                    Password = BCrypt.Net.BCrypt.HashPassword(txtPassword.Password),
+                    Email = emailTextBox.Text,
+                    DateOfBirth = dateOfBirthPicker.SelectedDate,
+                    PhoneNumber = Phone.Text,
+                    Location = location.Text,
                     Gender = genderstring
-                    // Add other fields as needed
                 };
-                newUser.Password = BCrypt.Net.BCrypt.HashPassword(txtPassword.Password);//using to hash the password before storing in DB
-                await _userService.AddUserAsync(newUser);  // Use _userService to add the user
+
+                await _userService.AddUserAsync(newUser);
                 MessageBox.Show("User registered successfully!");
             }
             catch (Exception ex)
@@ -90,22 +107,19 @@ namespace VolunteerP.View
             }
         }
 
-        private void NameTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (ContainsDigits(nameTextBox.textbox.Text))
-            {
-                nameErrorTextBlock.Text = "Name cannot contain numbers.";
-            }
-            else
-            {
-                nameErrorTextBlock.Text = "";  // Clear the error message when the input is valid
-            }
-        }
+      //  private void NameTextBox_TextChanged(object sender, TextChangedEventArgs e)
+       // {
+        //    if (ContainsDigits(nameTextBox.textbox.Text))
+         //   {
+         //       nameErrorTextBlock.Text = "Name cannot contain numbers.";
+         //   }
+         //   else
+         //   {
+           //     nameErrorTextBlock.Text = "";  // Clear the error message when the input is valid
+          //  }
+     //   }
 
-        private bool ContainsDigits(string input)
-        {
-            return input.Any(char.IsDigit);
-        }
+       
 
         private void GenderOption_Click(object sender, RoutedEventArgs e)
         {
@@ -118,7 +132,6 @@ namespace VolunteerP.View
                 genderstring = selectedOption.Text == "Male" ? "Male" : "Female";
                 int gender = selectedOption.Text == "Male" ? 1 : 0;
                 
-                // Assuming you have a User model or similar to update
                 // UpdateUserGender(gender);  // Implement this method to handle your user data update
 
                 // Optionally, you can use another approach to find and update only when saving if you prefer to bind a property
@@ -136,11 +149,58 @@ namespace VolunteerP.View
             if (!string.IsNullOrEmpty(txtPassword.Password))
             {
                 TextPassword.Visibility = Visibility.Collapsed;
+                passwordErrorIcon.Visibility = Visibility.Collapsed;
             }
             else
             {
                 TextPassword.Visibility = Visibility.Visible;
             }
+        }
+
+        private bool AreAllFieldsFilled()
+        {
+            return !string.IsNullOrWhiteSpace(nameTextBox.Text) &&
+                   !string.IsNullOrWhiteSpace(txtPassword.Password) &&
+                   !string.IsNullOrWhiteSpace(emailTextBox.Text);// Ensure all required fields are not empty
+        }
+
+        private void DisplayFieldErrors()
+        {
+            nameErrorIcon.Visibility = Visibility.Collapsed;
+            passwordErrorIcon.Visibility = Visibility.Collapsed;
+            emailErrorIcon.Visibility = Visibility.Collapsed;
+            
+
+            // Display error icon if fields are empty
+            if (string.IsNullOrWhiteSpace(nameTextBox.Text))
+                nameErrorIcon.Visibility = Visibility.Visible;
+
+            if (string.IsNullOrWhiteSpace(txtPassword.Password))
+                passwordErrorIcon.Visibility = Visibility.Visible;
+
+            if (string.IsNullOrWhiteSpace(emailTextBox.Text))
+                emailErrorIcon.Visibility = Visibility.Visible;
+
+        }
+
+
+        private void EmailTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Hide the error icon when the user starts typing in the email field
+            emailErrorIcon.Visibility = Visibility.Collapsed;
+        }
+
+        private void NameTextBox_TextChanged(Object sender, TextChangedEventArgs e)
+        {
+            nameErrorIcon.Visibility = Visibility.Collapsed;
+        }
+
+        //check if the email have a valid
+
+        private bool IsValidEmail(string email)
+        {
+            string pattern = @"^[a-zA-Z0-9._%+-]+@(gmail\.com|hotmail\.com)$";
+            return Regex.IsMatch(email, pattern);
         }
 
 
