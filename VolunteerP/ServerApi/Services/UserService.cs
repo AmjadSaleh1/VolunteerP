@@ -45,6 +45,17 @@ public class UserService
             return user != null;
         }
 
+        public async Task<string> GetUserGenderByEmail(string email)
+        {
+            var user = await GetUserByEmailAsync(email);
+            if (user != null)
+            {
+                return user.Gender ?? "Unknown"; // Return gender or "Unknown" if null
+            }
+            return "Unknown"; // Return "Unknown" if no user is found
+        }
+
+
 
 
     }

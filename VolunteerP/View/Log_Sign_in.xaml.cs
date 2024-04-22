@@ -87,8 +87,19 @@ namespace VolunteerP.View
                     if (isValidUser)
                     {
                         MessageBox.Show("Login Successful!");
-                        var appWindow = new View.Needy();
-                        appWindow.Show();
+                        string gender = await _userService.GetUserGenderByEmail(txtEmail.Text);
+                        Window appWindo;
+                        if(gender.ToLower()=="male")
+                        {
+                            appWindo = new View.Needy();
+                            appWindo.Show();
+                        }
+                        else
+                        {
+                            appWindo = new View.Voulnteer();
+                            appWindo.Show();
+                        }
+                        
                         this.Close();
                     }
                     else
