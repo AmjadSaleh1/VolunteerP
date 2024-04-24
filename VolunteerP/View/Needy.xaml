@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:VolunteerP.ViewModel"
-        xmlns:Menu="clr-namespace:VolunteerP.Utilities"
+        xmlns:Menu="clr-namespace:VolunteerP.Utilities" 
         mc:Ignorable="d"
         Title="Needy" 
         Height="600"
@@ -14,9 +14,8 @@
         WindowStyle="none"
         Background="Transparent">
 
-    <Window.DataContext>
-        <vm:NavigationVM />
-    </Window.DataContext>
+
+
 
     <Grid>
 
@@ -54,13 +53,13 @@
                             <Ellipse MouseDown="Ellipse_MouseDown">
                                 <Ellipse.Fill>
                                     <ImageBrush x:Name="UserSignProfileImage"
-                                    ImageSource="C:\Users\amjad\source\repos\VolunteerP\VolunteerP\Images\profilemepty.jpg">
+                                    ImageSource="{Binding User.ImageUrl}">
 
                                     </ImageBrush>
                                 </Ellipse.Fill>
                             </Ellipse>
                         </Border>
-                        <TextBlock Text="NAme"
+                        <TextBlock Text="{Binding User.Name,FallbackValue='Loading...'}"
                                    Style="{StaticResource Text_Style}"
                                    Margin="30 -40"/>
                     </DockPanel>

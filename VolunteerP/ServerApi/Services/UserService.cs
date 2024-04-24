@@ -19,7 +19,9 @@ public class UserService
         _usersCollection = database.GetCollection<User>("users");
     }
 
-    public async Task AddUserAsync(User user)
+   
+
+        public async Task AddUserAsync(User user)
     {
         await _usersCollection.InsertOneAsync(user);
     }
@@ -28,6 +30,7 @@ public class UserService
         {
             return await _usersCollection.Find(user => user.Email == email).FirstOrDefaultAsync();
         }
+        
 
         public async Task<bool> ValidateUserLogin(string email, string password)
         {
@@ -44,6 +47,8 @@ public class UserService
             var user = await _usersCollection.Find(u => u.Email == email).FirstOrDefaultAsync();
             return user != null;
         }
+
+      
 
         public async Task<string> GetUserGenderByEmail(string email)
         {

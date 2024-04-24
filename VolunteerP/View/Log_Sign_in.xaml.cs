@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using VolunteerP.ServerApi.Data;
+using VolunteerP.ServerApi.Models;
 using VolunteerP.ServerApi.Services;
 
 namespace VolunteerP.View
@@ -22,9 +23,11 @@ namespace VolunteerP.View
     /// </summary>
     public partial class Log_Sign_in : Window
     {
+        
         private UserService _userService;
         public Log_Sign_in()
         {
+            
             InitializeComponent();
             InitializeUserService();
         }
@@ -91,7 +94,7 @@ namespace VolunteerP.View
                         Window appWindo;
                         if(gender.ToLower()=="male")
                         {
-                            appWindo = new View.Needy();
+                            appWindo = new View.Needy(txtEmail.Text);
                             appWindo.Show();
                         }
                         else

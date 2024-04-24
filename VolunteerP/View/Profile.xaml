@@ -4,6 +4,7 @@
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
                 xmlns:local="clr-namespace:VolunteerP.View"
+                xmlns:vm="clr-namespace:VolunteerP.ViewModel"
                 mc:Ignorable="d" 
                 d:DesignHeight="600"
                 d:DesignWidth="622">
@@ -33,7 +34,7 @@
             <Grid>
                 <Image Source="C:\Users\amjad\source\repos\VolunteerP\VolunteerP\Images\Name-icon.png"
                        Style="{StaticResource Image_Style}" Margin="162,2,0,0" VerticalAlignment="Top" />
-                <TextBlock Text="NAME" Style="{StaticResource Text_Style}"
+                <TextBlock Text="{Binding User.Name,FallbackValue='Name'}" Style="{StaticResource Text_Style}"
               HorizontalAlignment="Center" Margin="20 0 0 0"
               FontSize="30"/>
             </Grid>
