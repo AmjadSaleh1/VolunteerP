@@ -53,7 +53,7 @@
                                 Margin="20 -30 0 0">
                             <Ellipse MouseDown="Ellipse_MouseDown">
                                 <Ellipse.Fill>
-                                    <ImageBrush x:Name="UserProfileImage"
+                                    <ImageBrush x:Name="UserSignProfileImage"
                                     ImageSource="C:\Users\amjad\source\repos\VolunteerP\VolunteerP\Images\profilemepty.jpg">
 
                                     </ImageBrush>

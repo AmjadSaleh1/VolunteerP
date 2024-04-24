@@ -6,6 +6,8 @@ using VolunteerP.ServerApi.Models;
 using VolunteerP.Utilities;
 using VolunteerP.ServerApi.Services;
 using System.Text.RegularExpressions;
+using Microsoft.Win32;
+using System.Windows.Media.Imaging;
 
 namespace VolunteerP.View
 {
@@ -15,6 +17,7 @@ namespace VolunteerP.View
     public partial class SignUp : Window
     {
         private UserService _userService;
+        private string userImageUrl;
         public int SelectedGender { get; set; }
         private string genderstring;
 
@@ -95,7 +98,8 @@ namespace VolunteerP.View
                     DateOfBirth = dateOfBirthPicker.SelectedDate,
                     PhoneNumber = Phone.Text,
                     Location = location.Text,
-                    Gender = genderstring
+                    Gender = genderstring,
+                    ImageUrl= userImageUrl
                 };
 
                 await _userService.AddUserAsync(newUser);
@@ -107,19 +111,18 @@ namespace VolunteerP.View
             }
         }
 
-      //  private void NameTextBox_TextChanged(object sender, TextChangedEventArgs e)
-       // {
-        //    if (ContainsDigits(nameTextBox.textbox.Text))
-         //   {
-         //       nameErrorTextBlock.Text = "Name cannot contain numbers.";
-         //   }
-         //   else
-         //   {
-           //     nameErrorTextBlock.Text = "";  // Clear the error message when the input is valid
-          //  }
-     //   }
+        private void Ellipse_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            OpenFileDialog openDialog = new OpenFileDialog();
+            openDialog.Filter = "Image files|*.bmp;*.jpg;*png";
+            openDialog.FilterIndex = 1;
+            if (openDialog.ShowDialog() == true)
+            {
+                userImageUrl = openDialog.FileName;
+                this.UserProfileImage.ImageSource = new BitmapImage(new Uri(userImageUrl));
+            }
+        }
 
-       
 
         private void GenderOption_Click(object sender, RoutedEventArgs e)
         {

@@ -45,7 +45,7 @@ namespace VolunteerP.View
             if (openDialog.ShowDialog() == true)
             {
                 var url = openDialog.FileName;
-                this.UserProfileImage.ImageSource = new BitmapImage(new Uri(url));
+                this.UserSignProfileImage.ImageSource = new BitmapImage(new Uri(url));
             }
         }
     }
