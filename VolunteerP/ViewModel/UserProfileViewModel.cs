@@ -53,6 +53,8 @@ namespace VolunteerP.ViewModel
             CurrentView = new HomeVm();
         }
 
+       
+
         public async Task InitializeAsync(string userEmail)
         {
             await LoadUserData(userEmail);
@@ -74,7 +76,10 @@ namespace VolunteerP.ViewModel
 
         private void Home(object obj) => CurrentView = new HomeVm();
         private void Product(object obj) => CurrentView = new ProductVm();
-        private void Profile(object obj) => CurrentView = new ProfileVm();
+        private void Profile(object obj)
+        {
+            CurrentView = new ProfileVm(User);
+        }
 
 
 

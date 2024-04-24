@@ -23,7 +23,7 @@
                 <Ellipse MouseDown="Ellipse_MouseDown">
                     <Ellipse.Fill>
                         <ImageBrush x:Name="UserProfileImage"
-                ImageSource="C:\Users\amjad\source\repos\VolunteerP\VolunteerP\Images\profilemepty.jpg">
+                ImageSource="{Binding User.ImageUrl}">
 
                         </ImageBrush>
                     </Ellipse.Fill>
@@ -48,21 +48,21 @@
             <Grid>
                 <Image Source="C:\Users\amjad\source\repos\VolunteerP\VolunteerP\Images\email_icon.png"
 Style="{StaticResource Image_Style}" Margin="162,33,0,0" VerticalAlignment="Top" />
-                <TextBlock Text="Email" Style="{StaticResource Text_Style}"
+                <TextBlock Text="{Binding User.Email,FallbackValue='Email'}" Style="{StaticResource Text_Style}"
             HorizontalAlignment="Center" Margin="20 30 0 0"
             FontSize="30"/>
             </Grid>
             <Grid>
                 <Image Source="C:\Users\amjad\source\repos\VolunteerP\VolunteerP\Images\location_icon.png"
 Style="{StaticResource Image_Style}" Margin="162,33,0,0" VerticalAlignment="Top" />
-                <TextBlock Text="Location" Style="{StaticResource Text_Style}"
+                <TextBlock Text="{Binding User.Location,FallbackValue='Location'}" Style="{StaticResource Text_Style}"
              HorizontalAlignment="Center" Margin="20 30 0 0"
              FontSize="30"/>
             </Grid>
             <Grid>
                 <Image Source="C:\Users\amjad\source\repos\VolunteerP\VolunteerP\Images\phone_icon.png"
 Style="{StaticResource Image_Style}" Margin="162,33,0,0" VerticalAlignment="Top" />
-                <TextBlock Text="Phone" Style="{StaticResource Text_Style}"
+                <TextBlock Text="{Binding User.PhoneNumber,FallbackValue='Phone'}" Style="{StaticResource Text_Style}"
                  HorizontalAlignment="Center" Margin="20 30 0 0"
                  FontSize="30"/>
             </Grid>
