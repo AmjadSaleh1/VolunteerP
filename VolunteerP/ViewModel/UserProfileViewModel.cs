@@ -38,7 +38,7 @@ namespace VolunteerP.ViewModel
             set { _currentView = value; OnPropertyChanged(); }
         }
 
-        public ICommand HomeCommand { get; set; }
+        public ICommand PostCommand { get; set; }
         public ICommand ProductsCommand { get; set; }
         public ICommand ProfileCommand { get; set; }
         public ICommand LogoutCommand { get; set; }
@@ -47,7 +47,7 @@ namespace VolunteerP.ViewModel
         {
             var mongoDBContext = new MongoDbContext();
             _userService = new UserService(mongoDBContext.Database);
-            HomeCommand = new RelayCommand(Home);
+            PostCommand = new RelayCommand(Post);
             ProductsCommand = new RelayCommand(Product);
             ProfileCommand = new RelayCommand(Profile);
             CurrentView = new HomeVm();
@@ -74,7 +74,7 @@ namespace VolunteerP.ViewModel
 
        
 
-        private void Home(object obj) => CurrentView = new HomeVm();
+        private void Post(object obj) => CurrentView = new PostVm();
         private void Product(object obj) => CurrentView = new ProductVm();
         private void Profile(object obj)
         {

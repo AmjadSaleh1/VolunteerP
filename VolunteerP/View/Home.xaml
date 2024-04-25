@@ -8,26 +8,27 @@
              d:DesignHeight="600"
              d:DesignWidth="622">
     <Grid>
-        <Border CornerRadius="0,20,20,0" Margin="0,5,5,0">
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="400"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" CornerRadius="0,20,20,0" Margin="0,5,5,0">
             <StackPanel Orientation="Vertical" Margin="10">
-                
                 <TextBox x:Name="postTextBox" Text="whats in ur mind" Height="102" TextWrapping="Wrap"  />
-                <Button Content="Post"  HorizontalAlignment="Right" Margin="10,0,0,0"/>
-                <ListView x:Name="feedListView" Margin="10" Height="116">
-
-
-
-                    <TextBlock Text="amjad" Foreground="red" FontWeight="Bold"/>
-                    <TextBlock Text="hello" TextWrapping="Wrap"/>
-                    <TextBlock Text="hello" Foreground="REd"/>
-                    <Button Content="Comment" Command="{Binding CommentCommand}"/>
-
-
-
-                </ListView>
+                <Button Content="Upload Photo" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+                <Image x:Name="imagePreview" Height="100" Visibility="Collapsed" />
+                <Button Content="Post" Click="Post_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,0,0,0"/>
             </StackPanel>
-
+        </Border>
+        <Border Grid.Row="1" CornerRadius="0,20,20,0">
+            <ListView x:Name="feedListView" Margin="10" Height="116"
+                      VerticalAlignment="Top">
+                <TextBlock Text="amjad" Foreground="red" FontWeight="Bold"/>
+                <TextBlock Text="hello" TextWrapping="Wrap"/>
+                <TextBlock Text="hello" Foreground="REd"/>
+                <Button Content="Comment" Command="{Binding CommentCommand}"/>
+                <Image Source="{Binding ImagePath}" Height="100" Visibility="{Binding ImageVisibility}"/>
+            </ListView>
         </Border>
     </Grid>
 </UserControl>

@@ -66,7 +66,7 @@
                     <!--// Home //-->
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding HomeCommand}"
+                              Command="{Binding PostCommand}"
                               IsChecked="True">
 
                         <Grid>
