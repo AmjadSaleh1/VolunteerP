@@ -213,6 +213,12 @@ namespace VolunteerP.View
             this.Close();
 
         }
+        private void Back_click(object sender, EventArgs e)
+        {
+            var appWindow = new View.Log_Sign_in();
+            appWindow.Show();
+            this.Close();
+        }
 
     }
 }

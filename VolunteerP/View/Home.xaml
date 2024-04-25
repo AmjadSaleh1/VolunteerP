@@ -10,8 +10,23 @@
     <Grid>
         <Border CornerRadius="0,20,20,0" Margin="0,5,5,0">
 
-            <Image Source="C:\Users\amjad\source\repos\VolunteerP\VolunteerP\Images\img_home.png"
-                   Stretch="Fill" />
+            <StackPanel Orientation="Vertical" Margin="10">
+                
+                <TextBox x:Name="postTextBox" Text="whats in ur mind" Height="102" TextWrapping="Wrap"  />
+                <Button Content="Post"  HorizontalAlignment="Right" Margin="10,0,0,0"/>
+                <ListView x:Name="feedListView" Margin="10" Height="116">
+
+
+
+                    <TextBlock Text="amjad" Foreground="red" FontWeight="Bold"/>
+                    <TextBlock Text="hello" TextWrapping="Wrap"/>
+                    <TextBlock Text="hello" Foreground="REd"/>
+                    <Button Content="Comment" Command="{Binding CommentCommand}"/>
+
+
+
+                </ListView>
+            </StackPanel>
 
         </Border>
     </Grid>

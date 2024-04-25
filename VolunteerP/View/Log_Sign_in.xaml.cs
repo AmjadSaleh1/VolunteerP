@@ -99,7 +99,7 @@ namespace VolunteerP.View
                         }
                         else
                         {
-                            appWindo = new View.Voulnteer();
+                            appWindo = new View.Voulnteer(txtEmail.Text);
                             appWindo.Show();
                         }
                         

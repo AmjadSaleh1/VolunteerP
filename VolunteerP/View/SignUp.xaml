@@ -50,8 +50,9 @@
                                Foreground="black"
                                Margin="0 20 0 20"
                                Text="Please Fill all youre information to continue"/>
-                <Button x:Name="gamil" Style="{StaticResource ButtonBlack}">
-                    <fa:ImageAwesome Icon="AngleRight"
+                <Button x:Name="Back" Style="{StaticResource ButtonBlack}"
+                        Click="Back_click">
+                    <fa:ImageAwesome Icon="AngleLeft"
                                         Width="25" Height="25"
                                         Foreground="green"
                                         Margin="3 0 0 0"/>

@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using VolunteerP.ViewModel;
 
 namespace VolunteerP.View
 {
@@ -20,9 +21,12 @@ namespace VolunteerP.View
     /// </summary>
     public partial class Voulnteer : Window
     {
-        public Voulnteer()
+        public Voulnteer(string email)
         {
             InitializeComponent();
+            var viewModel = new UserProfileViewModel();
+            DataContext = viewModel;
+            viewModel.InitializeAsync(email);
         }
 
         private void CloseApp_Click(object sender, RoutedEventArgs e)
