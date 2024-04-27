@@ -6,7 +6,5 @@
         xmlns:local="clr-namespace:VolunteerP"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button Content="Test Database Connection" Click="TestConnection_Click"/>
-    </Grid>
+    
 </Window>

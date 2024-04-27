@@ -22,13 +22,10 @@ namespace VolunteerP
         {
 
             InitializeComponent();
-        }
-
-        private void TestConnection_Click(object sender, RoutedEventArgs e)
-        {
             var AppWindow = new View.Log_Sign_in();
             AppWindow.Show();
             this.Close();
         }
+
     }
 }

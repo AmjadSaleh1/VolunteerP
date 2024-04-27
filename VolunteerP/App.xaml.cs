@@ -15,7 +15,7 @@ namespace VolunteerP
         {
             base.OnStartup(e);
             var dbContext = new MongoDbContext();
-            dbContext.TestDatabaseConnection();  // This will execute the test
+            
         }
     }
 

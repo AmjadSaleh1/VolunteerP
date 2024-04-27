@@ -3,7 +3,7 @@
                     xmlns:vm="clr-namespace:VolunteerP.ViewModel"
                     xmlns:view="clr-namespace:VolunteerP.View">
 
-    <DataTemplate DataType="{x:Type vm:HomeVm}">
+    <DataTemplate DataType="{x:Type vm:PostVm}">
         <view:Home />
     </DataTemplate>
 

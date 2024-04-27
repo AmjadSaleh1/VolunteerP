@@ -14,20 +14,25 @@
         </Grid.RowDefinitions>
         <Border Grid.Row="0" CornerRadius="0,20,20,0" Margin="0,5,5,0">
             <StackPanel Orientation="Vertical" Margin="10">
-                <TextBox x:Name="postTextBox" Text="whats in ur mind" Height="102" TextWrapping="Wrap"  />
+                <TextBox x:Name="postTextBox" Text="whats in ur mind" Height="102" TextWrapping="Wrap" GotFocus="PostTextBox_GotFocus" />
                 <Button Content="Upload Photo" HorizontalAlignment="Left" Margin="10,0,0,0"/>
                 <Image x:Name="imagePreview" Height="100" Visibility="Collapsed" />
                 <Button Content="Post" Click="Post_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,0,0,0"/>
             </StackPanel>
         </Border>
         <Border Grid.Row="1" CornerRadius="0,20,20,0">
-            <ListView x:Name="feedListView" Margin="10" Height="116"
-                      VerticalAlignment="Top">
-                <TextBlock Text="amjad" Foreground="red" FontWeight="Bold"/>
-                <TextBlock Text="hello" TextWrapping="Wrap"/>
-                <TextBlock Text="hello" Foreground="REd"/>
-                <Button Content="Comment" Command="{Binding CommentCommand}"/>
-                <Image Source="{Binding ImagePath}" Height="100" Visibility="{Binding ImageVisibility}"/>
+            <ListView x:Name="feedListView" ItemsSource="{Binding Posts}" Margin="10" VerticalAlignment="Stretch">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding UserPost}" Foreground="Red" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding PostName}" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding PostTime, StringFormat='{}{0:MMM dd, yyyy HH:mm}'}" Foreground="Red"/>
+                            <Button Content="Comment" Command="{Binding CommentCommand}"/>
+                            <Image Source="{Binding ImagePath}" Height="100" Visibility="{Binding ImageVisibility}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
         </Border>
     </Grid>

@@ -17,6 +17,7 @@ namespace VolunteerP.ViewModel
     public class UserProfileViewModel : ViewModelBase
     {
         private readonly UserService _userService;
+        private  PostService _postservice;
         private User _user;
         private object _currentView;
         public User User
@@ -31,6 +32,7 @@ namespace VolunteerP.ViewModel
                 }
             }
         }
+
 
         public object CurrentView
         {
@@ -47,10 +49,11 @@ namespace VolunteerP.ViewModel
         {
             var mongoDBContext = new MongoDbContext();
             _userService = new UserService(mongoDBContext.Database);
+            _postservice = new PostService(mongoDBContext.Database);
             PostCommand = new RelayCommand(Post);
             ProductsCommand = new RelayCommand(Product);
             ProfileCommand = new RelayCommand(Profile);
-            CurrentView = new HomeVm();
+            CurrentView = new PostVm(_postservice);
         }
 
        
@@ -74,8 +77,13 @@ namespace VolunteerP.ViewModel
 
        
 
-        private void Post(object obj) => CurrentView = new PostVm();
+        private void Post(object obj)
+        {
+            CurrentView = new PostVm(_postservice);
+            OnPropertyChanged(nameof(CurrentView));
+        }
         private void Product(object obj) => CurrentView = new ProductVm();
+
         private void Profile(object obj)
         {
             CurrentView = new ProfileVm(User);

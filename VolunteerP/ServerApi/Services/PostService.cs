@@ -22,5 +22,18 @@ namespace VolunteerP.ServerApi.Services
         {
             await _postCollection.InsertOneAsync(post);
         }
+
+        public async Task<List<Post>> GetAllPostsAsync()
+        {
+            try
+            {
+                return await _postCollection.Find(_ => true).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                // Log the exception here to diagnose issues with the database query
+                throw new Exception("Error retrieving posts: " + ex.Message, ex);
+            }
+        }
     }
 }
