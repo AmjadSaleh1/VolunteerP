@@ -13,7 +13,6 @@
                 <ResourceDictionary Source="Style/Page.xaml"/>
                 <ResourceDictionary Source="Utilities\DataTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <Utilities:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

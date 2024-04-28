@@ -60,7 +60,19 @@ namespace VolunteerP.ViewModel
             var post = postObject as Post;
             if (post != null)
             {
-                post.IsEditable = true;
+                EditPostDialog dialog = new EditPostDialog(post, _postService)
+                {
+                    Owner = Application.Current.MainWindow, // Set the owner window for centering
+                    PostContent = post.UserPost, // Pass the current content to the dialog
+                    DataContext = post
+                };
+
+                if (dialog.ShowDialog() == true) // Show the dialog as modal
+                {
+                    post.UserPost = dialog.PostContent; // Update the post content with the dialog's result
+                                                        // Call the service to update the database
+                    _postService.UpdatePostAsync(post.Id, post.UserPost);
+                }
             }
         }
 

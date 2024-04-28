@@ -19,9 +19,8 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding UserPost}" Visibility="{Binding IsEditable, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}" />
-                            <TextBox Text="{Binding UserPost}" Visibility="{Binding IsEditable, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                            <Button Content="Edit" Command="{Binding DataContext.EditPostCommand, ElementName=userControlRoot}" CommandParameter="{Binding}" />
+                            <TextBlock Text="{Binding UserPost}"/>
+                            <Button Content="Edit" Command="{Binding Path=DataContext.EditPostCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding}" />
                             <Button Content="Delete" Command="{Binding DataContext.DeletePostCommand, ElementName=userControlRoot}" CommandParameter="{Binding}" />
                         </StackPanel>
                     </DataTemplate>
