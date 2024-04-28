@@ -17,6 +17,7 @@ namespace VolunteerP.ServerApi.Models
         public string PostName { get; set; }
         public DateTime PostTime { get; set; }
         public string ImagePath { get; set; }
-        public string UserEmail { get; set; }    
+        public string UserEmail { get; set; }
+        public bool IsEditable { get; internal set; }
     }
 }

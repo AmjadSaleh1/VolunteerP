@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using VolunteerP.ServerApi.Data;
 using VolunteerP.ServerApi.Models;
 using VolunteerP.ServerApi.Services;
+using VolunteerP.Utilities;
+using static VolunteerP.View.Home;
 
 namespace VolunteerP.View
 {
@@ -89,6 +91,8 @@ namespace VolunteerP.View
                     bool isValidUser = await _userService.ValidateUserLogin(txtEmail.Text, txtPassword.Password); // Await is used correctly here
                     if (isValidUser)
                     {
+                        var loggedInUser = await _userService.GetUserByEmailAsync(txtEmail.Text);
+                        UserHelper.SetCurrentUser(loggedInUser);
                         MessageBox.Show("Login Successful!");
                         string gender = await _userService.GetUserGenderByEmail(txtEmail.Text);
                         Window appWindo;

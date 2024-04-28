@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using VolunteerP.ServerApi.Data;
 using VolunteerP.ServerApi.Models;
 using VolunteerP.ServerApi.Services;
+using VolunteerP.Utilities;
 using VolunteerP.ViewModel;
 
 namespace VolunteerP.View
@@ -62,10 +63,10 @@ namespace VolunteerP.View
             var newPost = new Post
             {
                 UserPost = postTextBox.Text,
-                PostName = "YourUserName", // This should be retrieved from the logged-in user's data.
+                PostName = UserHelper.CurrentUser.Name, // This should be retrieved from the logged-in user's data.
                 PostTime = DateTime.Now,
                 ImagePath = "PathOrURLToImage", // This should be set after the user uploads an image.
-                UserEmail = "THE USER EMAIL" // This should be the email of the logged-in user.
+                UserEmail = UserHelper.CurrentUser.Email// This should be the email of the logged-in user.
             };
 
             try

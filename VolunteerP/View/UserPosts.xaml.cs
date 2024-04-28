@@ -12,17 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VolunteerP.ServerApi.Data;
+using VolunteerP.ViewModel;
+using static VolunteerP.View.Home;
 
 namespace VolunteerP.View
 {
     /// <summary>
-    /// Interaction logic for Product.xaml
+    /// Interaction logic for UserPosts.xaml
     /// </summary>
-    public partial class Product : UserControl
+    public partial class UserPosts : UserControl
     {
-        public Product()
+        public UserPosts()
         {
             InitializeComponent();
+            this.DataContext = new UserPostsVm();
         }
     }
 }

@@ -16,8 +16,9 @@ namespace VolunteerP.ViewModel
 {
     public class UserProfileViewModel : ViewModelBase
     {
+
         private readonly UserService _userService;
-        private  PostService _postservice;
+        private PostService _postService;
         private User _user;
         private object _currentView;
         public User User
@@ -41,19 +42,21 @@ namespace VolunteerP.ViewModel
         }
 
         public ICommand PostCommand { get; set; }
-        public ICommand ProductsCommand { get; set; }
+        public ICommand UserPostCommand { get; set; }
         public ICommand ProfileCommand { get; set; }
         public ICommand LogoutCommand { get; set; }
 
         public UserProfileViewModel()
         {
+            _postService = ServiceLocator.PostService;
             var mongoDBContext = new MongoDbContext();
             _userService = new UserService(mongoDBContext.Database);
-            _postservice = new PostService(mongoDBContext.Database);
             PostCommand = new RelayCommand(Post);
-            ProductsCommand = new RelayCommand(Product);
+            UserPostCommand = new RelayCommand(UserPost);
             ProfileCommand = new RelayCommand(Profile);
-            CurrentView = new PostVm(_postservice);
+            CurrentView = new PostVm(_postService);
+
+           
         }
 
        
@@ -79,10 +82,22 @@ namespace VolunteerP.ViewModel
 
         private void Post(object obj)
         {
-            CurrentView = new PostVm(_postservice);
+            CurrentView = new PostVm(_postService);
             OnPropertyChanged(nameof(CurrentView));
         }
-        private void Product(object obj) => CurrentView = new ProductVm();
+
+        private void UserPost(object obj)
+        {
+            try
+            {
+                CurrentView = new UserPostsVm();
+                OnPropertyChanged(nameof(CurrentView));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error when trying to load posts: {ex.Message}");
+            }
+        }
 
         private void Profile(object obj)
         {

@@ -7,8 +7,8 @@
         <view:Home />
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vm:ProductVm}">
-        <view:Product />
+    <DataTemplate DataType="{x:Type vm:UserPostsVm}">
+        <view:UserPosts/>
     </DataTemplate>
     
     <DataTemplate DataType="{x:Type vm:ProfileVm}">

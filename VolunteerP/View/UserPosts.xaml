@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="VolunteerP.View.UserPosts"
+             x:Name="userControlRoot"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:VolunteerP.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="600"
+             d:DesignWidth="622"
+             Style="{StaticResource Page_Style}">
+
+    
+
+    <Grid Margin="15">
+
+        <Border CornerRadius="0,20,20,0">
+            <ListView x:Name="postsListView" ItemsSource="{Binding Posts}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding UserPost}" Visibility="{Binding IsEditable, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}" />
+                            <TextBox Text="{Binding UserPost}" Visibility="{Binding IsEditable, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                            <Button Content="Edit" Command="{Binding DataContext.EditPostCommand, ElementName=userControlRoot}" CommandParameter="{Binding}" />
+                            <Button Content="Delete" Command="{Binding DataContext.DeletePostCommand, ElementName=userControlRoot}" CommandParameter="{Binding}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Border>
+
+        
+
+    </Grid>
+</UserControl>

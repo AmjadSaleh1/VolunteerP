@@ -65,7 +65,7 @@
                     <!--// Home //-->
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding HomeCommand}"
+                              Command="{Binding PostCommand}"
                               IsChecked="True">
 
                         <Grid>
@@ -84,14 +84,14 @@
 
 
                     <Menu:Btn Style="{StaticResource BtnStyle}"
-                              Command="{Binding ProductsCommand}">
+                              Command="{Binding UserPostCommand}">
 
                         <Grid>
 
                             <Image Source="C:\Users\amjad\source\repos\VolunteerP\VolunteerP\Images\img_product.png"
                                    Style="{StaticResource Image_Style}" />
 
-                            <TextBlock Text="Products"
+                            <TextBlock Text="My Posts"
                                        Style="{StaticResource Text_Style}" />
 
                         </Grid>
