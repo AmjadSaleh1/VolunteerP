@@ -65,5 +65,25 @@ namespace VolunteerP.ServerApi.Services
 
             return result.ModifiedCount == 1;
         }
+
+        public async Task<bool> AddCommentToPost(ObjectId postId, Comment comment)
+        {
+            var filter = Builders<Post>.Filter.Eq(p => p.Id, postId);
+            var update = Builders<Post>.Update.Push(p => p.Comments, comment);
+
+            try
+            {
+                var result = await _postCollection.UpdateOneAsync(filter, update);
+                return result.ModifiedCount == 1;
+            }
+            catch (Exception ex)
+            {
+                // Handle any exceptions here
+                // For example, log the exception and return false or rethrow it
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
     }
 }

@@ -1,0 +1,38 @@
+﻿<Window x:Class="VolunteerP.Utilities.CommentDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VolunteerP.Utilities"
+        mc:Ignorable="d"
+        Title="Comment" Height="200" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Comment List -->
+        <ListView x:Name="CommentsListView" Grid.Row="0" Margin="10">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding CommentText}" FontWeight="Bold" />
+                        <TextBlock Text=" by " />
+                        <TextBlock Text="{Binding UserName}" FontStyle="Italic" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <!-- New Comment Box -->
+        <TextBox x:Name="NewCommentTextBox" Grid.Row="1" Text="Write your comment here..." Margin="10" AcceptsReturn="True" Height="60" />
+
+        <!-- Buttons for Commenting -->
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" Margin="10">
+            <Button Content="Comment" Click="Comment_Click" Margin="5"/>
+            <Button Content="Comment Anonymously" Click="CommentAnonymously_Click" Margin="5"/>
+        </StackPanel>
+    </Grid>
+</Window>

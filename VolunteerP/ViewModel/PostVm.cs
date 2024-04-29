@@ -22,6 +22,7 @@ namespace VolunteerP.ViewModel
         private PostService _postService;
         public ICommand ContactCommand { get; private set; }
         public ICommand AddPhotoCommand { get; private set; }
+        public ICommand CommentsCommand {  get; private set; }
 
         private Post _newPost;
         public Post NewPost
@@ -91,10 +92,37 @@ namespace VolunteerP.ViewModel
             InitializePostsAsync();
             ContactCommand = new RelayCommand(DisplayContactInfo);
             AddPhotoCommand = new RelayCommand(AddPhotoExecute);
+            CommentsCommand = new RelayCommand(OpenCommentsDialog);
             NewPost = new Post();
             _postService = postService;
         }
 
+        private void OpenCommentsDialog(object parameter)
+        {
+            if (parameter is Post selectedPost)
+            {
+                var dialog = new CommentDialog(selectedPost);
+
+                if (dialog.ShowDialog() == true)
+                {
+                    // Logic to handle comment addition if needed
+                    // Example:
+                    // Check if new comment was not empty and then add to the post comments
+                    if (!string.IsNullOrWhiteSpace(dialog.NewCommentText))
+                    {
+                        Comment newComment = new Comment
+                        {
+                            CommentText = dialog.NewCommentText,
+                            IsAnonymous = dialog.IsAnonymous
+                            // Set other necessary properties
+                        };
+                        selectedPost.Comments.Add(newComment);
+                        _postservice.AddCommentToPost(selectedPost.Id, newComment);
+                        // Make sure to implement AddCommentToPost in your PostService
+                    }
+                }
+            }
+        }
 
 
         private async void AddPhotoExecute(object parameter)

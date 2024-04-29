@@ -1,8 +1,7 @@
 ﻿<Application x:Class="VolunteerP.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:VolunteerP"
-             xmlns:Utilities="clr-namespace:VolunteerP.Utilities"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+             xmlns:utilities="clr-namespace:VolunteerP.Utilities"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -13,6 +12,7 @@
                 <ResourceDictionary Source="Style/Page.xaml"/>
                 <ResourceDictionary Source="Utilities\DataTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <utilities:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

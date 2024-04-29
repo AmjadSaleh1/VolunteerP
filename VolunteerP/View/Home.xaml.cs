@@ -100,6 +100,43 @@ namespace VolunteerP.View
             }
         }
 
+        private async void PostAnonymously_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(postTextBox.Text))
+            {
+                MessageBox.Show("Post cannot be empty");
+                return;
+            }
+
+            if (!(this.DataContext is PostVm viewModel))
+            {
+                MessageBox.Show("Data context is not set properly.");
+                return;
+            }
+
+            var newPost = new Post
+            {
+                UserPost = postTextBox.Text,
+                PostName = UserHelper.CurrentUser.UserName, // Use a generic name
+                PostTime = DateTime.Now,
+                UserEmail = UserHelper.CurrentUser.Email,
+                ImagePath = viewModel.ImagePath, // Can still include an image if desired
+                IsAnonymous = true // This should be a new boolean property in your Post model
+            };
+
+            try
+            {
+                await _postservice.AddPostAsync(newPost);
+                viewModel.Posts.Add(newPost);
+                postTextBox.Clear();
+                MessageBox.Show("Anonymous post added successfully!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }
+        }
+
 
 
         public async void LoadPosts()

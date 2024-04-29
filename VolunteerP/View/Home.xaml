@@ -17,7 +17,10 @@
                 <TextBox x:Name="postTextBox" Text="{Binding NewPost.UserPost, UpdateSourceTrigger=PropertyChanged}" />
                 <Button Content="Add Photo" Command="{Binding AddPhotoCommand}" />
                 <Image x:Name="imagePreview" Height="44" Source="{Binding ImagePath, UpdateSourceTrigger=PropertyChanged}" Visibility="Visible" />
-                <Button Content="Post" Click="Post_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,0,0,0"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Post" Click="Post_Click" Margin="10,0,0,0"/>
+                    <Button Content="Post Anonymously" Click="PostAnonymously_Click" Margin="10,0,0,0"/>
+                </StackPanel>
             </StackPanel>
         </Border>
         <Border Grid.Row="1" CornerRadius="0,20,20,0">
@@ -28,7 +31,13 @@
                             <TextBlock Text="{Binding UserPost}" Foreground="Red" FontWeight="Bold"/>
                             <TextBlock Text="{Binding PostName}" TextWrapping="Wrap"/>
                             <TextBlock Text="{Binding PostTime, StringFormat='{}{0:MMM dd, yyyy HH:mm}'}" Foreground="Red"/>
-                            <Button Content="Contact" Command="{Binding DataContext.ContactCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding}" />
+                            <Button Content="Contact" 
+                            Visibility="{Binding IsAnonymous, Converter={StaticResource BooleanToVisibilityConverter}}" 
+                            Command="{Binding DataContext.ContactCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" 
+                            CommandParameter="{Binding}" />
+                            <Button Content="Comment"
+                            Command="{Binding DataContext.CommentsCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
+                             CommandParameter="{Binding}" />
                             <Image Source="{Binding ImagePath}" Width="100" Height="100"/>
                         </StackPanel>
                     </DataTemplate>
