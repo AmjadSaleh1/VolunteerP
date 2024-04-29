@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using MongoDB.Bson;
 using VolunteerP.ServerApi.Models;
 
 namespace VolunteerP.ServerApi.Services
@@ -54,6 +55,15 @@ namespace VolunteerP.ServerApi.Services
         public async Task DeletePostAsync(ObjectId postId)
         {
             await _postCollection.DeleteOneAsync(post => post.Id == postId);
+        }
+
+        public async Task<bool> UpdatePostImagePath(ObjectId postId, string imagePath)
+        {
+            var filter = Builders<Post>.Filter.Eq(post => post.Id, postId);
+            var update = Builders<Post>.Update.Set(post => post.ImagePath, imagePath);
+            var result = await _postCollection.UpdateOneAsync(filter, update);
+
+            return result.ModifiedCount == 1;
         }
     }
 }

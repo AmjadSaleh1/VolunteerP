@@ -14,9 +14,9 @@
         </Grid.RowDefinitions>
         <Border Grid.Row="0" CornerRadius="0,20,20,0" Margin="0,5,5,0">
             <StackPanel Orientation="Vertical" Margin="10">
-                <TextBox x:Name="postTextBox" Text="whats in ur mind" Height="102" TextWrapping="Wrap" GotFocus="PostTextBox_GotFocus" />
-                <Button Content="Upload Photo" HorizontalAlignment="Left" Margin="10,0,0,0"/>
-                <Image x:Name="imagePreview" Height="100" Visibility="Collapsed" />
+                <TextBox x:Name="postTextBox" Text="{Binding NewPost.UserPost, UpdateSourceTrigger=PropertyChanged}" />
+                <Button Content="Add Photo" Command="{Binding AddPhotoCommand}" />
+                <Image x:Name="imagePreview" Height="44" Source="{Binding ImagePath, UpdateSourceTrigger=PropertyChanged}" Visibility="Visible" />
                 <Button Content="Post" Click="Post_Click" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,0,0,0"/>
             </StackPanel>
         </Border>
@@ -28,8 +28,8 @@
                             <TextBlock Text="{Binding UserPost}" Foreground="Red" FontWeight="Bold"/>
                             <TextBlock Text="{Binding PostName}" TextWrapping="Wrap"/>
                             <TextBlock Text="{Binding PostTime, StringFormat='{}{0:MMM dd, yyyy HH:mm}'}" Foreground="Red"/>
-                            <Button Content="Comment" Command="{Binding CommentCommand}"/>
-                            <Image Source="{Binding ImagePath}" Height="100" Visibility="{Binding ImageVisibility}"/>
+                            <Button Content="Contact" Command="{Binding DataContext.ContactCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding}" />
+                            <Image Source="{Binding ImagePath}" Width="100" Height="100"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

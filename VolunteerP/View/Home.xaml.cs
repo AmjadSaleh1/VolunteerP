@@ -34,6 +34,7 @@ namespace VolunteerP.View
             InitializeComponent();
             InitializeDatabaseConnection();
             LoadPosts();
+            this.DataContext = new PostVm(_postservice);
         }
 
 
@@ -59,23 +60,34 @@ namespace VolunteerP.View
                 return;
             }
 
-            // Proceed if the post content is not empty.
+            // Initialize ViewModel from DataContext
+            if (!(this.DataContext is PostVm viewModel))
+            {
+                MessageBox.Show("Data context is not set properly.");
+                return;
+            }
+
+            // Create the new post object.
             var newPost = new Post
             {
                 UserPost = postTextBox.Text,
-                PostName = UserHelper.CurrentUser.Name, // This should be retrieved from the logged-in user's data.
+                PostName = UserHelper.CurrentUser.Name,
                 PostTime = DateTime.Now,
-                ImagePath = "PathOrURLToImage", // This should be set after the user uploads an image.
-                UserEmail = UserHelper.CurrentUser.Email// This should be the email of the logged-in user.
+                ImagePath = viewModel.ImagePath, // Temporarily set image path
+                UserEmail = UserHelper.CurrentUser.Email,
+                UserPhone = UserHelper.CurrentUser.PhoneNumber
             };
 
             try
             {
-                // Add the post to the database.
+                // Add the post to the database. Make sure this sets the Id of newPost.
                 await _postservice.AddPostAsync(newPost);
 
+                // Update the image path in the database.
+
+
                 // Add the post to the ObservableCollection bound to the ListView.
-                ((PostVm)this.DataContext).Posts.Add(newPost);
+                viewModel.Posts.Add(newPost);
 
                 // Clear the text box after the post has been successfully added.
                 postTextBox.Clear();
@@ -87,6 +99,8 @@ namespace VolunteerP.View
                 MessageBox.Show($"An error occurred: {ex.Message}");
             }
         }
+
+
 
         public async void LoadPosts()
         {
