@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using VolunteerP.ServerApi.Models;
 using BCrypt.Net;
+using MongoDB.Driver.Core.Configuration;
 
 
 
@@ -60,6 +61,11 @@ public class UserService
             return "Unknown"; // Return "Unknown" if no user is found
         }
 
+
+        public async Task<int> GetUserCountAsync()
+        {
+            return (int)await _usersCollection.CountDocumentsAsync(new BsonDocument());
+        }
 
 
 

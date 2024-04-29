@@ -41,7 +41,7 @@
             <Grid>
                 <Image Source="C:\Users\amjad\source\repos\VolunteerP\VolunteerP\Images\hidden_icon.png"
        Style="{StaticResource Image_Style}" Margin="162,33,0,0" VerticalAlignment="Top" />
-                <TextBlock Text="Username" Style="{StaticResource Text_Style}"
+                <TextBlock Text="{Binding User.UserName,FallbackValue='UserName'}" Style="{StaticResource Text_Style}"
             HorizontalAlignment="Center" Margin="20 30 0 0"
             FontSize="30"/>
             </Grid>

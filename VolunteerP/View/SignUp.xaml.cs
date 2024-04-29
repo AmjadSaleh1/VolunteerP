@@ -90,12 +90,16 @@ namespace VolunteerP.View
                     return;
                 }
 
+                int userCount = await _userService.GetUserCountAsync();
+                string userName = "friend" + (userCount + 1);
+
                 User newUser = new User
                 {
                     Name = nameTextBox.Text,
                     Password = BCrypt.Net.BCrypt.HashPassword(txtPassword.Password),
                     Email = emailTextBox.Text,
                     DateOfBirth = dateOfBirthPicker.SelectedDate,
+                    UserName = userName,
                     PhoneNumber = Phone.Text,
                     Location = location.Text,
                     Gender = genderstring,
