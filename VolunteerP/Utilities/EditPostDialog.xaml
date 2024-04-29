@@ -7,7 +7,17 @@
         mc:Ignorable="d"
           Title="Edit Post" Height="200" Width="300">
     <Grid>
-        <TextBox x:Name="PostContentTextBox" Text="{Binding UserPost, UpdateSourceTrigger=PropertyChanged}" Margin="10" />
-        <Button Content="Save" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10" Click="SaveButton_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="PostContentTextBox" Text="{Binding UserPost, UpdateSourceTrigger=PropertyChanged}" Margin="10" Grid.Row="0" />
+        <Image x:Name="PostImage" Source="{Binding ImagePath, UpdateSourceTrigger=PropertyChanged}" Height="100" Margin="10" Grid.Row="1"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" Margin="10">
+            <Button Content="Change/Add Image" Click="ChangeImageButton_Click" Margin="5"/>
+            <Button Content="Remove Image" Click="RemoveImageButton_Click" Margin="5"/>
+            <Button Content="Save" Click="SaveButton_Click" Margin="5"/>
+        </StackPanel>
     </Grid>
 </Window>
