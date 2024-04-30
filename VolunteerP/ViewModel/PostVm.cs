@@ -24,6 +24,10 @@ namespace VolunteerP.ViewModel
         public ICommand AddPhotoCommand { get; private set; }
         public ICommand CommentsCommand {  get; private set; }
 
+        private ObservableCollection<Post> _filteredPosts;
+        private string _searchText;
+
+
         private Post _newPost;
         public Post NewPost
         {
@@ -83,18 +87,54 @@ namespace VolunteerP.ViewModel
         }
 
         private PostService _postservice;
-        public ObservableCollection<Post> Posts { get; private set; }
+        public ObservableCollection<Post> Posts
+        {
+            get => _posts;
+            private set
+            {
+                _posts = value;
+                OnPropertyChanged(nameof(Posts));
+            }
+        }
 
         public PostVm(PostService postService)
         {
-            _postservice = postService ?? throw new ArgumentNullException(nameof(postService));
+            _postService = postService ?? throw new ArgumentNullException(nameof(postService));
             Posts = new ObservableCollection<Post>();
+            FilteredPosts = new ObservableCollection<Post>();
             InitializePostsAsync();
             ContactCommand = new RelayCommand(DisplayContactInfo);
             AddPhotoCommand = new RelayCommand(AddPhotoExecute);
             CommentsCommand = new RelayCommand(OpenCommentsDialog);
             NewPost = new Post();
             _postService = postService;
+        }
+
+        private ObservableCollection<Post> _posts;
+
+        public ObservableCollection<Post> FilteredPosts
+        {
+            get => _filteredPosts;
+            set
+            {
+                _filteredPosts = value;
+                OnPropertyChanged(nameof(FilteredPosts));
+            }
+        }
+
+
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                if (_searchText != value)
+                {
+                    _searchText = value;
+                    OnPropertyChanged(nameof(SearchText));  // This should trigger property change notification
+                    FilterPosts(_searchText);  // This should filter the posts based on the new search text
+                }
+            }
         }
 
         private void OpenCommentsDialog(object parameter)
@@ -150,21 +190,36 @@ namespace VolunteerP.ViewModel
             }
         }
 
-        private async Task InitializePostsAsync()
+        private async void InitializePostsAsync()
         {
             try
             {
-                var postsFromDb = await _postservice.GetAllPostsAsync();
-                foreach (var post in postsFromDb)
-                {
-                    Posts.Add(post);
-                }
+                var postsFromDb = await _postService.GetAllPostsAsync();
+                Posts = new ObservableCollection<Post>(postsFromDb);
+                FilteredPosts = new ObservableCollection<Post>(Posts);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Failed to load posts: " + ex.Message);
             }
         }
+
+        private void FilterPosts(string searchText)
+        {
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                FilteredPosts = new ObservableCollection<Post>(Posts);
+            }
+            else
+            {
+                var filtered = Posts.Where(post =>
+                    (post.UserPost?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false) ||
+                    (post.PostName?.Contains(searchText, StringComparison.OrdinalIgnoreCase) ?? false)
+                ).ToList();
+                FilteredPosts = new ObservableCollection<Post>(filtered);
+            }
+        }
+
 
 
         // Method to add a new post to the collection and the database

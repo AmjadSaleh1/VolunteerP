@@ -33,8 +33,9 @@ namespace VolunteerP.View
         {
             InitializeComponent();
             InitializeDatabaseConnection();
-            LoadPosts();
-            this.DataContext = new PostVm(_postservice);
+            var dbContext = new MongoDbContext();
+            var postService = new PostService(dbContext.Database);
+            this.DataContext = new PostVm(postService);
         }
 
 
@@ -138,19 +139,6 @@ namespace VolunteerP.View
         }
 
 
-
-        public async void LoadPosts()
-        {
-            try
-            {
-                var posts = await _postservice.GetAllPostsAsync();
-                feedListView.ItemsSource = posts; // Correctly set ItemsSource
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Failed to load posts: " + ex.Message);
-            }
-        }
 
         private void PostTextBox_GotFocus(object sender, RoutedEventArgs e)
         {
