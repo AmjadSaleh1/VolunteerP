@@ -108,6 +108,19 @@ namespace VolunteerP.ViewModel
             CommentsCommand = new RelayCommand(OpenCommentsDialog);
             NewPost = new Post();
             _postService = postService;
+            EventSystem.OnPostUpdated += HandlePostUpdated;
+            LoadPosts();
+        }
+
+        private void HandlePostUpdated(Post updatedPost)
+        {
+            // Handle the updated post information
+            InitializePostsAsync(); // Reload all posts, or optimize by updating only affected post
+        }
+
+        public void Cleanup()
+        {
+            EventSystem.OnPostUpdated -= HandlePostUpdated; // Unsubscribe from the event
         }
 
         private ObservableCollection<Post> _posts;
@@ -196,7 +209,7 @@ namespace VolunteerP.ViewModel
             {
                 var postsFromDb = await _postService.GetAllPostsAsync();
                 Posts = new ObservableCollection<Post>(postsFromDb);
-                FilteredPosts = new ObservableCollection<Post>(Posts);
+                FilteredPosts = new ObservableCollection<Post>(postsFromDb.Where(p => p.IsVisible));
             }
             catch (Exception ex)
             {
@@ -220,6 +233,22 @@ namespace VolunteerP.ViewModel
             }
         }
 
+
+
+        private async void LoadPosts()
+        {
+            try
+            {
+                var postsFromDb = await _postService.GetAllPostsAsync();
+                var visiblePosts = postsFromDb.Where(p => p.IsVisible).ToList();
+                Posts = new ObservableCollection<Post>(visiblePosts);
+                FilteredPosts = new ObservableCollection<Post>(visiblePosts);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load posts: " + ex.Message);
+            }
+        }
 
 
         // Method to add a new post to the collection and the database

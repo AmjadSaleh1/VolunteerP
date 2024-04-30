@@ -51,10 +51,16 @@ namespace VolunteerP.ViewModel
             _postService = postService;
 
             LoadUsers();
-            LoadPosts();
+            Task.Run(() => LoadPostsForAdmin());
 
             LockCommand = new RelayCommand(LockUser);
             HideCommand = new RelayCommand(HidePost);
+        }
+
+        public async Task InitializeAsync()
+        {
+            await LoadPostsForAdmin();
+            // Any additional setup can go here
         }
 
         private async void LoadUsers()
@@ -88,15 +94,13 @@ namespace VolunteerP.ViewModel
             }
         }
 
-        private async Task LoadPosts()
+
+        private async Task LoadPostsForAdmin()
         {
             try
             {
-                var posts = await _postService.GetAllPostsAsync();
-                if (posts != null)
-                {
-                    Posts = new ObservableCollection<Post>(posts.Where(p => p.IsVisible)); // Only show visible posts
-                }
+                var posts = await _postService.GetAllPostsAsync();  // Fetches all posts
+                Posts = new ObservableCollection<Post>(posts);  // Sets to display all posts in admin view
             }
             catch (Exception ex)
             {
@@ -104,19 +108,25 @@ namespace VolunteerP.ViewModel
             }
         }
 
+
+
+
         private async void HidePost(object parameter)
         {
             var post = parameter as Post;
             if (post != null)
             {
-                post.IsVisible = !post.IsVisible; // Toggle visibility
-                await _postService.UpdatePost(post); // Update in database
+                // Toggle the visibility
+                post.IsVisible = !post.IsVisible;
 
-                // Optionally show a message indicating the action's success
-                MessageBox.Show($"Post {(post.IsVisible ? "visible" : "hidden")}.", "Info");
+                // Update the post in the database
+                await _postService.UpdatePost(post);
 
-                // Refresh the list of posts
-                await LoadPosts();
+                // Show a message box indicating the new visibility status
+                MessageBox.Show(post.IsVisible ? "The post is now visible." : "The post is now hidden.", "Visibility Changed");
+
+                // Optionally refresh the posts list if it's displayed elsewhere
+                await LoadPostsForAdmin();
             }
         }
 
