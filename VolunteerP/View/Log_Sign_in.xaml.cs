@@ -101,14 +101,9 @@ namespace VolunteerP.View
                             appWindo = new View.AdminPanel();
                             appWindo.Show();
                         }
-                        if (gender.ToLower()=="male")
-                        {
-                            appWindo = new View.Needy(txtEmail.Text);
-                            appWindo.Show();
-                        }
                         else
                         {
-                            appWindo = new View.Voulnteer(txtEmail.Text);
+                            appWindo = new View.Needy(txtEmail.Text);
                             appWindo.Show();
                         }
                         

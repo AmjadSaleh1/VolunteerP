@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using MongoDB.Bson;
 using VolunteerP.ServerApi.Models;
+using System.Collections.ObjectModel;
 
 namespace VolunteerP.ServerApi.Services
 {
@@ -90,8 +91,8 @@ namespace VolunteerP.ServerApi.Services
         public async Task UpdatePost(Post post)
         {
             var filter = Builders<Post>.Filter.Eq(p => p.Id, post.Id);
-            var update = Builders<Post>.Update
-                .Set(p => p.IsVisible, post.IsVisible);
+            var update = Builders<Post>.Update.Set(p => p.IsVisible, post.IsVisible);
+            await _postCollection.UpdateOneAsync(filter, update);
 
             try
             {
@@ -104,6 +105,8 @@ namespace VolunteerP.ServerApi.Services
                 throw;
             }
         }
+
+      
 
     }
 }

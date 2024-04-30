@@ -15,6 +15,7 @@ using VolunteerP.ServerApi.Services;
 using VolunteerP.ViewModel;
 using VolunteerP.ServerApi.Models;
 using VolunteerP.ServerApi.Data;
+using VolunteerP.Utilities;
 
 namespace VolunteerP.View
 {
@@ -26,16 +27,18 @@ namespace VolunteerP.View
         public AdminPanel()
         {
             InitializeComponent();
-
-            // Initialize the database context
             var dbContext = new MongoDbContext();
-
-            // Initialize services with the database instance
             var userService = new UserService(dbContext.Database);
             var postService = new PostService(dbContext.Database);
-
-            // Set the DataContext
             DataContext = new AdminViewModel(userService, postService);
+        }
+
+        private void Back_to_app(object sender, EventArgs e)
+        {
+            var Window = new View.Needy(UserHelper.CurrentUser.Email);
+            Window.Show();
+            this.Close();
+
         }
     }
 }

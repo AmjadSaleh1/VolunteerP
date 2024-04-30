@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VolunteerP.View"
+        xmlns:utilities="clr-namespace:VolunteerP.Utilities"
         mc:Ignorable="d"
         Title="AdminPanel" Height="450" Width="800">
     <Grid>
@@ -12,10 +13,14 @@
                 <ListView ItemsSource="{Binding Users}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Username" DisplayMemberBinding="{Binding Username}"/>
-                            <GridViewColumn Header="Status" DisplayMemberBinding="{Binding Status}"/>
-                            <GridViewColumn>
-                                <Button Content="Lock/Unlock" Command="{Binding LockCommand}"/>
+                            <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"/>
+                            <GridViewColumn Header="Status" DisplayMemberBinding="{Binding IsLocked, Converter={StaticResource BooleanToStatusConverter}}"/>
+                            <GridViewColumn Header="Action">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Lock/Unlock" Command="{Binding DataContext.LockCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                         </GridView>
                     </ListView.View>
@@ -25,15 +30,20 @@
                 <ListView ItemsSource="{Binding Posts}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Post Title" DisplayMemberBinding="{Binding Title}"/>
-                            <GridViewColumn Header="Visible" DisplayMemberBinding="{Binding IsVisible}"/>
-                            <GridViewColumn>
-                                <Button Content="Hide/Unhide" Command="{Binding HideCommand}"/>
+                            <GridViewColumn Header="Post Title" DisplayMemberBinding="{Binding UserPost}"/>
+                            <GridViewColumn Header="Visible" DisplayMemberBinding="{Binding IsVisible, Converter={StaticResource BooleanPostToVisibilityConverter}}"/>
+                            <GridViewColumn Header="Action">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Content="Hide/Unhide" Command="{Binding DataContext.HideCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" CommandParameter="{Binding}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>
             </TabItem>
         </TabControl>
+        <Button Content="see Posts" HorizontalAlignment="Right" VerticalAlignment="Bottom" Padding="10" Click="Back_to_app" Width="109" Style="{StaticResource buttonMain}"/>
     </Grid>
 </Window>

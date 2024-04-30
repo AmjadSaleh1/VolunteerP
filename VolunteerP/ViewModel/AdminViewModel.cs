@@ -9,14 +9,35 @@ using VolunteerP.ServerApi.Models;
 using VolunteerP.ServerApi.Services;
 using VolunteerP.Utilities;
 using VolunteerP.ServerApi.Data;
+using System.Windows;
 
 
 namespace VolunteerP.ViewModel
 {
-    public class AdminViewModel
+    public class AdminViewModel : ViewModelBase
     {
-        public ObservableCollection<User> Users { get; set; }
-        public ObservableCollection<Post> Posts { get; set; }
+        private ObservableCollection<User> _users;
+        public ObservableCollection<User> Users
+        {
+            get => _users;
+            set
+            {
+                _users = value;
+                OnPropertyChanged(nameof(Users));  // Assuming OnPropertyChanged implements INotifyPropertyChanged
+            }
+        }
+
+        private ObservableCollection<Post> _posts;
+        public ObservableCollection<Post> Posts
+        {
+            get => _posts;
+            set
+            {
+                _posts = value;
+                OnPropertyChanged(nameof(Posts));  // Same assumption as above
+            }
+        }
+
 
         public ICommand LockCommand { get; private set; }
         public ICommand HideCommand { get; private set; }
@@ -29,9 +50,6 @@ namespace VolunteerP.ViewModel
             _userService = userService;
             _postService = postService;
 
-            Users = new ObservableCollection<User>();  // Load users from database
-            Posts = new ObservableCollection<Post>();  // Load posts from database
-
             LoadUsers();
             LoadPosts();
 
@@ -39,39 +57,70 @@ namespace VolunteerP.ViewModel
             HideCommand = new RelayCommand(HidePost);
         }
 
-        private void LoadUsers()
+        private async void LoadUsers()
         {
-            // Assume GetUsersAsync returns a List<User>
-            var users = _userService.GetUsersAsync().Result;  // Replace with proper async handling
-            Users = new ObservableCollection<User>(users);
+            try
+            {
+                var users = await _userService.GetUsersAsync();
+                if (users != null && users.Any())
+                {
+                    Users = new ObservableCollection<User>(users);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load users: " + ex.Message);
+            }
         }
 
-        private void LoadPosts()
-        {
-            // Assume GetPostsAsync returns a List<Post>
-            var posts = _postService.GetAllPostsAsync().Result;  // Replace with proper async handling
-            Posts = new ObservableCollection<Post>(posts);
-        }
+       
 
-        private async void LockUser(object userObject)
+        private async void LockUser(object parameter)
         {
-            var user = userObject as User;
+            var user = parameter as User;
             if (user != null)
             {
-                user.IsLocked = !user.IsLocked;  // Toggle lock status
-                await _userService.UpdateUser(user);
+                user.IsLocked = !user.IsLocked; // Toggle lock state
+                await _userService.UpdateUser(user); // Update in database
+
+                // Optionally show a message indicating the action's success
+                MessageBox.Show($"User {(user.IsLocked ? "locked" : "unlocked")}.", "Info");
             }
         }
 
-        private async void HidePost(object postObject)
+        private async Task LoadPosts()
         {
-            var post = postObject as Post;
-            if (post != null)
+            try
             {
-                post.IsVisible = !post.IsVisible;  // Toggle visibility
-                await _postService.UpdatePost(post);
+                var posts = await _postService.GetAllPostsAsync();
+                if (posts != null)
+                {
+                    Posts = new ObservableCollection<Post>(posts.Where(p => p.IsVisible)); // Only show visible posts
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Failed to load posts: " + ex.Message);
             }
         }
+
+        private async void HidePost(object parameter)
+        {
+            var post = parameter as Post;
+            if (post != null)
+            {
+                post.IsVisible = !post.IsVisible; // Toggle visibility
+                await _postService.UpdatePost(post); // Update in database
+
+                // Optionally show a message indicating the action's success
+                MessageBox.Show($"Post {(post.IsVisible ? "visible" : "hidden")}.", "Info");
+
+                // Refresh the list of posts
+                await LoadPosts();
+            }
+        }
+
+
 
     }
 }

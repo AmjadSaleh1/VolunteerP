@@ -38,7 +38,15 @@ public class UserService
             var user = await GetUserByEmailAsync(email);
             if (user != null && BCrypt.Net.BCrypt.Verify(password, user.Password))
             {
-                return true;  // User found and password matches
+                if (user.IsLocked)
+                {
+                    throw new Exception("This account has been locked. Please try again later.");
+                }
+
+                else
+                {
+                    return true;
+                }
             }
             return false;  // No user found or password does not match
         }
@@ -76,9 +84,9 @@ public class UserService
         public async Task UpdateUser(User user)
         {
             var filter = Builders<User>.Filter.Eq(u => u.Id, user.Id);
-            var update = Builders<User>.Update
-                .Set(u => u.IsLocked, user.IsLocked);
-                
+            var update = Builders<User>.Update.Set(u => u.IsLocked, user.IsLocked);
+            await _usersCollection.UpdateOneAsync(filter, update);
+
             try
             {
                 await _usersCollection.UpdateOneAsync(filter, update);

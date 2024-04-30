@@ -103,7 +103,8 @@ namespace VolunteerP.View
                     PhoneNumber = Phone.Text,
                     Location = location.Text,
                     Gender = genderstring,
-                    ImageUrl= userImageUrl
+                    ImageUrl = userImageUrl,
+                    IsLocked = false    
                 };
 
                 await _userService.AddUserAsync(newUser);

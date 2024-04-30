@@ -13,6 +13,8 @@
                 <ResourceDictionary Source="Utilities\DataTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <utilities:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+            <utilities:BooleanToVisibilityConverter x:Key="BooleanPostToVisibilityConverter"/>
+            <utilities:BooleanToVisibilityConverter x:Key="BooleanToStatusConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

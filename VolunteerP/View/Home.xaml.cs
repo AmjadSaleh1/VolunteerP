@@ -76,7 +76,9 @@ namespace VolunteerP.View
                 PostTime = DateTime.Now,
                 ImagePath = viewModel.ImagePath, // Temporarily set image path
                 UserEmail = UserHelper.CurrentUser.Email,
-                UserPhone = UserHelper.CurrentUser.PhoneNumber
+                UserPhone = UserHelper.CurrentUser.PhoneNumber,
+                IsVisible = true
+                
             };
 
             try
