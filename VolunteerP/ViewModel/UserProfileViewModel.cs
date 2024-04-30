@@ -104,7 +104,11 @@ namespace VolunteerP.ViewModel
             CurrentView = new ProfileVm(User);
         }
 
-
+        public async void UpdateUserProfileImage()
+        {
+            // Assuming _userService is available in the ViewModel
+            await _userService.UpdateUserProfileImage(User);
+        }
 
     }
 }

@@ -8,23 +8,25 @@
                 mc:Ignorable="d" 
                 d:DesignHeight="600"
                 d:DesignWidth="622">
+    
 
     <Grid>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="200"/>
             <RowDefinition Height="400"/>
         </Grid.RowDefinitions>
         <Grid>
+            
             <!--// Image //-->
             <Border Width="80" Height="80" Padding="3"
         Background="White" CornerRadius="100"
         DockPanel.Dock="Top" HorizontalAlignment="Center"
             Margin="20 0 0 0">
-                <Ellipse MouseDown="Ellipse_MouseDown">
+                <Ellipse>
                     <Ellipse.Fill>
                         <ImageBrush x:Name="UserProfileImage"
                 ImageSource="{Binding User.ImageUrl}">
-
                         </ImageBrush>
                     </Ellipse.Fill>
                 </Ellipse>
@@ -65,7 +67,12 @@ Style="{StaticResource Image_Style}" Margin="162,33,0,0" VerticalAlignment="Top"
                 <TextBlock Text="{Binding User.PhoneNumber,FallbackValue='Phone'}" Style="{StaticResource Text_Style}"
                  HorizontalAlignment="Center" Margin="20 30 0 0"
                  FontSize="30"/>
+                
             </Grid>
+            <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
+                <Button Content="Update Information" Command="{Binding UpdateInfoCommand}"  Style="{StaticResource GSignupButton}" Margin="10"
+                        Foreground="White"/>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

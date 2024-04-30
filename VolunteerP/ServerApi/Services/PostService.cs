@@ -13,6 +13,7 @@ namespace VolunteerP.ServerApi.Services
 {
     public class PostService
     {
+
         
         private readonly IMongoCollection<Post> _postCollection;
         public PostService(IMongoDatabase database) 
@@ -82,6 +83,25 @@ namespace VolunteerP.ServerApi.Services
                 // For example, log the exception and return false or rethrow it
                 Console.WriteLine(ex.Message);
                 return false;
+            }
+        }
+
+
+        public async Task UpdatePost(Post post)
+        {
+            var filter = Builders<Post>.Filter.Eq(p => p.Id, post.Id);
+            var update = Builders<Post>.Update
+                .Set(p => p.IsVisible, post.IsVisible);
+
+            try
+            {
+                await _postCollection.UpdateOneAsync(filter, update);
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions, e.g., logging
+                Console.WriteLine("Error updating post: " + ex.Message);
+                throw;
             }
         }
 

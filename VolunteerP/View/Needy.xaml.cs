@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using VolunteerP.ServerApi.Models;
 using VolunteerP.ViewModel;
+using System.IO;
 
 namespace VolunteerP.View
 {
@@ -47,13 +48,23 @@ namespace VolunteerP.View
 
         private void Ellipse_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            OpenFileDialog openDialog = new OpenFileDialog();
-            openDialog.Filter = "Image files|*.bmp;*.jpg;*png";
-            openDialog.FilterIndex = 1;
+            OpenFileDialog openDialog = new OpenFileDialog
+            {
+                Filter = "Image files|*.bmp;*.jpg;*.png",
+                FilterIndex = 1
+            };
             if (openDialog.ShowDialog() == true)
             {
-                var url = openDialog.FileName;
-                this.UserSignProfileImage.ImageSource = new BitmapImage(new Uri(url));
+                string filePath = openDialog.FileName;
+                string destinationPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures), System.IO.Path.GetFileName(filePath));
+                File.Copy(filePath, destinationPath, true);
+                UserSignProfileImage.ImageSource = new BitmapImage(new Uri(destinationPath, UriKind.Absolute));
+                var viewModel = DataContext as UserProfileViewModel;
+                if (viewModel != null)
+                {
+                    viewModel.User.ImageUrl = destinationPath;  // This should trigger the UI update
+                    viewModel.UpdateUserProfileImage();  // Assuming this updates the database
+                }
             }
         }
     }

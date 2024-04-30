@@ -53,7 +53,7 @@
                             <Ellipse MouseDown="Ellipse_MouseDown">
                                 <Ellipse.Fill>
                                     <ImageBrush x:Name="UserSignProfileImage"
-                                    ImageSource="{Binding User.ImageUrl}">
+                                    ImageSource="{Binding User.ImageUrl, UpdateSourceTrigger=PropertyChanged}">
 
                                     </ImageBrush>
                                 </Ellipse.Fill>

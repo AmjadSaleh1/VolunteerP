@@ -67,6 +67,51 @@ public class UserService
             return (int)await _usersCollection.CountDocumentsAsync(new BsonDocument());
         }
 
+        public async Task<List<User>> GetUsersAsync()
+        {
+            // This line fetches all documents from the 'users' collection and converts them to a List of User objects.
+            return await _usersCollection.Find(new BsonDocument()).ToListAsync();
+        }
+
+        public async Task UpdateUser(User user)
+        {
+            var filter = Builders<User>.Filter.Eq(u => u.Id, user.Id);
+            var update = Builders<User>.Update
+                .Set(u => u.IsLocked, user.IsLocked);
+                
+            try
+            {
+                await _usersCollection.UpdateOneAsync(filter, update);
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions, e.g., logging
+                Console.WriteLine("Error updating user: " + ex.Message);
+                throw;
+            }
+        }
+
+
+        public async Task UpdateUserinfo(User user)
+        {
+            var filter = Builders<User>.Filter.Eq(u => u.Id, user.Id);
+            var update = Builders<User>.Update
+                .Set(u => u.Name, user.Name)
+                .Set(u => u.Email, user.Email)
+                .Set(u => u.PhoneNumber, user.PhoneNumber)
+                .Set(u => u.UserName, user.UserName)
+                // Add other fields as necessary
+                ;
+            await _usersCollection.UpdateOneAsync(filter, update);
+        }
+
+
+        public async Task UpdateUserProfileImage(User user)
+        {
+            var filter = Builders<User>.Filter.Eq(u => u.Id, user.Id);
+            var update = Builders<User>.Update.Set(u => u.ImageUrl, user.ImageUrl);
+            await _usersCollection.UpdateOneAsync(filter, update);
+        }
 
 
     }

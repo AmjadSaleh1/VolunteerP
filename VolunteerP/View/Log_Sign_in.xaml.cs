@@ -96,7 +96,12 @@ namespace VolunteerP.View
                         MessageBox.Show("Login Successful!");
                         string gender = await _userService.GetUserGenderByEmail(txtEmail.Text);
                         Window appWindo;
-                        if(gender.ToLower()=="male")
+                        if (loggedInUser.Email.ToLower()=="amjad@gmail.com")
+                        {
+                            appWindo = new View.AdminPanel();
+                            appWindo.Show();
+                        }
+                        if (gender.ToLower()=="male")
                         {
                             appWindo = new View.Needy(txtEmail.Text);
                             appWindo.Show();

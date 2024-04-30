@@ -22,6 +22,7 @@ namespace VolunteerP.ServerApi.Models
         public string UserPhone { get; set; }
         public bool IsEditable { get; internal set; }
         public bool IsAnonymous { get; set; }
+        public bool IsVisible { get; set; }
         public ObservableCollection<Comment> Comments { get; set; }
         public Post()
         {
