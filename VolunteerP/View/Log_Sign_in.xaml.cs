@@ -95,17 +95,8 @@ namespace VolunteerP.View
                         UserHelper.SetCurrentUser(loggedInUser);
                         MessageBox.Show("Login Successful!");
                         Window appWindo;
-                        if (loggedInUser.Email.ToLower()=="amjad@gmail.com")
-                        {
-                            appWindo = new View.AdminPanel();
-                            appWindo.Show();
-                        }
-                        else
-                        {
-                            appWindo = new View.Needy(txtEmail.Text);
-                            appWindo.Show();
-                        }
-                        
+                        appWindo = new View.Needy(txtEmail.Text);
+                        appWindo.Show();
                         this.Close();
                     }
                     else
