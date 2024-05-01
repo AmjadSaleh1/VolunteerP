@@ -122,7 +122,17 @@
                             Style="{StaticResource Text_Style}"/>
                     </Grid>
 
+
                 </StackPanel>
+                <Grid VerticalAlignment="Bottom">
+                    <Button x:Name="AdminPage"
+    Style="{StaticResource AdminPageButton}"
+    Click="Admin_PageClick" HorizontalAlignment="left"
+    Margin="20 10 0 0"/>
+                    <TextBlock Text="Admin Page" 
+Style="{StaticResource Text_Style}"/>
+                </Grid>
+
 
             </Grid>
 

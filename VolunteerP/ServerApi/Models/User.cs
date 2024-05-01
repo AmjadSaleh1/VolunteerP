@@ -21,5 +21,6 @@ namespace VolunteerP.ServerApi.Models
         public string PhoneNumber { get; set; }
         public string Location { get; set; }
         public bool IsLocked { get; set; }
+        public bool IsAdmin {  get; set; }
     }
 }

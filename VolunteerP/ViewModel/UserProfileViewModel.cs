@@ -55,8 +55,9 @@ namespace VolunteerP.ViewModel
             UserPostCommand = new RelayCommand(UserPost);
             ProfileCommand = new RelayCommand(Profile);
             CurrentView = new PostVm(_postService);
+            
 
-           
+
         }
 
        

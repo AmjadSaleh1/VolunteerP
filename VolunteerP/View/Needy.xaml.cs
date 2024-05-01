@@ -46,6 +46,22 @@ namespace VolunteerP.View
             this.Close();
         }
 
+        private void Admin_PageClick(object sender, RoutedEventArgs e)
+        {
+            var viewModel = DataContext as UserProfileViewModel;
+            if (viewModel != null && viewModel.User.IsAdmin)
+            {
+                AdminPanel adminPanel = new AdminPanel();
+                adminPanel.Show();
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("You are not authorized to view this page.", "Access Denied", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
+        }
+
         private void Ellipse_MouseDown(object sender, MouseButtonEventArgs e)
         {
             OpenFileDialog openDialog = new OpenFileDialog

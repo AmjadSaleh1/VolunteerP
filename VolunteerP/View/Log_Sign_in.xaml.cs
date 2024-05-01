@@ -94,7 +94,6 @@ namespace VolunteerP.View
                         var loggedInUser = await _userService.GetUserByEmailAsync(txtEmail.Text);
                         UserHelper.SetCurrentUser(loggedInUser);
                         MessageBox.Show("Login Successful!");
-                        string gender = await _userService.GetUserGenderByEmail(txtEmail.Text);
                         Window appWindo;
                         if (loggedInUser.Email.ToLower()=="amjad@gmail.com")
                         {

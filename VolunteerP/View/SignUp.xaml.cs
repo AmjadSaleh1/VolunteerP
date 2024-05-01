@@ -104,7 +104,8 @@ namespace VolunteerP.View
                     Location = location.Text,
                     Gender = genderstring,
                     ImageUrl = userImageUrl,
-                    IsLocked = false    
+                    IsLocked = false,
+                    IsAdmin= false
                 };
 
                 await _userService.AddUserAsync(newUser);

@@ -124,7 +124,8 @@ namespace VolunteerP.View
                 PostTime = DateTime.Now,
                 UserEmail = UserHelper.CurrentUser.Email,
                 ImagePath = viewModel.ImagePath, // Can still include an image if desired
-                IsAnonymous = true // This should be a new boolean property in your Post model
+                IsAnonymous = true, // This should be a new boolean property in your Post model
+                IsVisible=true
             };
 
             try

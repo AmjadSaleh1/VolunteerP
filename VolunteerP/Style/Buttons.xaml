@@ -199,7 +199,41 @@
         </Setter>
 
     </Style>
-<!--/ Log in /Sign up Buttons/-->
+
+
+    <ImageBrush x:Key="AdminApp"
+          ImageSource="C:\Users\amjad\source\repos\VolunteerP\VolunteerP\Images\icons8-administrator-male-48.png"
+          Stretch="None" />
+
+
+    <Style x:Key="AdminPageButton"
+    TargetType="{x:Type Button}">
+
+        <Setter Property="Height"
+         Value="40" />
+        <Setter Property="Width"
+         Value="40" />
+
+        <Setter Property="Template">
+
+            <Setter.Value>
+
+                <ControlTemplate TargetType="{x:Type Button}">
+
+                    <Border x:Name="border"
+                     BorderThickness="0"
+                     Background="{StaticResource AdminApp}">
+
+                    </Border>
+
+                </ControlTemplate>
+
+            </Setter.Value>
+
+        </Setter>
+
+    </Style>
+    <!--/ Log in /Sign up Buttons/-->
     <Style x:Key="LButton" TargetType="{x:Type Button}">
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="Width" Value="170"/>
